@@ -1,9 +1,11 @@
 package org.example.xpneo4j.infra;
 
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.neo4j.core.schema.DynamicLabels;
 import org.springframework.data.neo4j.core.schema.RelationshipId;
 import org.springframework.data.neo4j.core.schema.RelationshipProperties;
 import org.springframework.data.neo4j.core.schema.TargetNode;
@@ -14,11 +16,11 @@ import org.springframework.data.neo4j.core.schema.TargetNode;
 @NoArgsConstructor
 @RelationshipProperties
 public class ResourceRelationshipEntity {
-    @RelationshipId
-    private String id;
+  @RelationshipId private String id;
 
-    @TargetNode
-    private ResourceEntity target;
+  @DynamicLabels @Builder.Default private Set<String> labels = Set.of();
 
-    private String context;
+  @TargetNode private ResourceEntity target;
+
+  private String context;
 }

@@ -4,17 +4,17 @@ import java.util.Set;
 
 public interface LineageProjection {
 
-    Set<NodeProjection> getNodes();  // List of all nodes in the path
+  Set<NodeProjection> getNodes(); // List of all nodes in the path
 
-    Set<RelationshipProjection> getRelationships();
+  Set<RelationshipProjection> getRelationships();
 
-    interface NodeProjection {
-        Long getResourceId();
+  interface NodeProjection {
+    Long getResourceId();
 
-        Set<String> getLabels();  // Add any other node properties you need
-    }
+    Set<String> getLabels(); // Add any other node properties you need
+  }
 
-    interface RelationshipProjection {
-        String getType();  // Type of relationship
-    }
+  interface RelationshipProjection {
+    String getType(); // Type of relationship
+  }
 }
