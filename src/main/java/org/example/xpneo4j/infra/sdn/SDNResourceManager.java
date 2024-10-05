@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 @Service
-@ConditionalOnProperty(name = "myapp.persistence.persistence.strategy", havingValue = "sdn")
+@ConditionalOnProperty(name = "myapp.persistence.strategy", havingValue = "sdn")
 public class SDNResourceManager implements ResourceCreator {
 
   @Autowired private ResourceRepo repo;

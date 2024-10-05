@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "myapp.persistence.persistence.strategy", havingValue = "template")
+@ConditionalOnProperty(name = "myapp.persistence.strategy", havingValue = "template")
 public class Neo4jTemplateResourceManager implements ResourceCreator {
   private static final String PROJECT_ID_FIELD = "projectId";
   private static final String RESOURCE_NAME_FIELD = "name";
