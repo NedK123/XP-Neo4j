@@ -5,15 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.xpneo4j.core.Relationships;
+import org.example.xpneo4j.core.RelationshipType;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResourceInfo {
-  private String resourceId;
+public class NeighborRegistrationInfo {
+  private String id;
+  private String name;
   private Set<String> labels;
-  private String context;
-  private Set<Relationships> relationshipLabels;
+  @Builder.Default private String relationshipContext = "default";
+  private RelationshipType relationshipLabel;
 }

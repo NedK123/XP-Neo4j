@@ -2,6 +2,7 @@ package org.example.xpneo4j.api;
 
 import lombok.AllArgsConstructor;
 import org.example.xpneo4j.core.RegisterDetachedResourceRequest;
+import org.example.xpneo4j.core.RegisterNeighborRequest;
 import org.example.xpneo4j.core.ResourceCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,12 @@ public class Controller {
 
   @PostMapping("/register-detached")
   public ResponseEntity<Void> register(@RequestBody RegisterDetachedResourceRequest request) {
+    resourceCreator.register(request);
+    return ResponseEntity.ok().build();
+  }
+
+  @PostMapping("/register-neighbor")
+  public ResponseEntity<Void> register(@RequestBody RegisterNeighborRequest request) {
     resourceCreator.register(request);
     return ResponseEntity.ok().build();
   }
