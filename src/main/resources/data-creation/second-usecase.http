@@ -81,12 +81,12 @@ Content-Type: application/json
 
 {
   "projectId": "{{project_id}}",
-  "targetResourceId": "{{B2}}",
+  "targetResourceId": "{{S1p}}",
   "neighbor": {
     "id": "{{E1p}}",
     "name": "E1p",
     "labels": ["E"],
-    "relationshipContext": "ref",
+    "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
 }
@@ -107,62 +107,10 @@ Content-Type: application/json
 
 {
   "projectId": "{{project_id}}",
-  "targetResourceId": "{{B2}}",
+  "targetResourceId": "{{S2p}}",
   "neighbor": {
     "id": "{{E2p}}",
     "name": "E2p",
-    "labels": ["E"],
-    "relationshipContext": "ref",
-    "relationshipLabel": "CREATED_UNDER"
-  }
-}
-
-> {%
-    client.test("Status code is 200", function () {
-        console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
-    });
-%}
-
-###
-< {%
-    client.global.set("E3p", $random.uuid.toString())
-%}
-POST http://localhost:8080/register-neighbor
-Content-Type: application/json
-
-{
-  "projectId": "{{project_id}}",
-  "targetResourceId": "{{S1p}}",
-  "neighbor": {
-    "id": "{{E3p}}",
-    "name": "E3p",
-    "labels": ["E"],
-    "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
-  }
-}
-
-> {%
-    client.test("Status code is 200", function () {
-        console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
-    });
-%}
-
-###
-< {%
-    client.global.set("E4p", $random.uuid.toString())
-%}
-POST http://localhost:8080/register-neighbor
-Content-Type: application/json
-
-{
-  "projectId": "{{project_id}}",
-  "targetResourceId": "{{S2p}}",
-  "neighbor": {
-    "id": "{{E4p}}",
-    "name": "E4p",
     "labels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
@@ -282,7 +230,7 @@ Content-Type: application/json
 
 ###
 < {%
-    client.global.set("E5p", $random.uuid.toString())
+    client.global.set("E3p", $random.uuid.toString())
 %}
 POST http://localhost:8080/register-neighbor
 Content-Type: application/json
@@ -290,6 +238,58 @@ Content-Type: application/json
 {
   "projectId": "{{project_id}}",
   "targetResourceId": "{{S3p}}",
+  "neighbor": {
+    "id": "{{E3p}}",
+    "name": "E3p",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E4p", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S4p}}",
+  "neighbor": {
+    "id": "{{E4p}}",
+    "name": "E4p",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E5p", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S5p}}",
   "neighbor": {
     "id": "{{E5p}}",
     "name": "E5p",
@@ -315,62 +315,10 @@ Content-Type: application/json
 
 {
   "projectId": "{{project_id}}",
-  "targetResourceId": "{{S4p}}",
+  "targetResourceId": "{{S6p}}",
   "neighbor": {
     "id": "{{E6p}}",
     "name": "E6p",
-    "labels": ["E"],
-    "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
-  }
-}
-
-> {%
-    client.test("Status code is 200", function () {
-        console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
-    });
-%}
-
-###
-< {%
-    client.global.set("E7p", $random.uuid.toString())
-%}
-POST http://localhost:8080/register-neighbor
-Content-Type: application/json
-
-{
-  "projectId": "{{project_id}}",
-  "targetResourceId": "{{S5p}}",
-  "neighbor": {
-    "id": "{{E7p}}",
-    "name": "E7p",
-    "labels": ["E"],
-    "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
-  }
-}
-
-> {%
-    client.test("Status code is 200", function () {
-        console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
-    });
-%}
-
-###
-< {%
-    client.global.set("E8p", $random.uuid.toString())
-%}
-POST http://localhost:8080/register-neighbor
-Content-Type: application/json
-
-{
-  "projectId": "{{project_id}}",
-  "targetResourceId": "{{S6p}}",
-  "neighbor": {
-    "id": "{{E8p}}",
-    "name": "E8p",
     "labels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
@@ -476,6 +424,58 @@ Content-Type: application/json
     "id": "{{S8p}}",
     "name": "S8p",
     "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E7p", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S7p}}",
+  "neighbor": {
+    "id": "{{E7p}}",
+    "name": "E7p",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E8p", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S8p}}",
+  "neighbor": {
+    "id": "{{E8p}}",
+    "name": "E8p",
+    "labels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
