@@ -4,15 +4,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Set;
+
+import lombok.extern.slf4j.Slf4j;
 import org.example.xpneo4j.core.RegisterDetachedResourceRequest;
 import org.example.xpneo4j.core.RegisterNeighborRequest;
 import org.example.xpneo4j.core.RelationshipType;
 import org.example.xpneo4j.core.ResourceCreator;
+import org.neo4j.driver.summary.ResultSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.neo4j.core.Neo4jClient;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @ConditionalOnProperty(name = "myapp.persistence.persistence.strategy", havingValue = "template")
 public class Neo4jTemplateResourceManager implements ResourceCreator {
@@ -40,21 +44,21 @@ public class Neo4jTemplateResourceManager implements ResourceCreator {
   @Override
   public void register(RegisterNeighborRequest request) {
     String query = generateRegisterNeighborQuery(request);
+    ResultSummary resultSummary = neo4jClient
+            .query(query)
+            .bind(request.getTargetResourceId())
+            .to(TARGET_RESOURCE_ID_FIELD)
+            .bind(request.getNeighbor().getId())
+            .to(RESOURCE_ID_FIELD)
+            .bind(request.getNeighbor().getName())
+            .to(RESOURCE_NAME_FIELD)
+            .bind(request.getProjectId())
+            .to(PROJECT_ID_FIELD)
+            .bind(request.getNeighbor().getRelationshipContext())
+            .to(RELATIONSHIP_CONTEXT_FIELD)
+            .run();
 
-    System.out.println(query);
-    neo4jClient
-        .query(query)
-        .bind(request.getTargetResourceId())
-        .to(TARGET_RESOURCE_ID_FIELD)
-        .bind(request.getNeighbor().getId())
-        .to(RESOURCE_ID_FIELD)
-        .bind(request.getNeighbor().getName())
-        .to(RESOURCE_NAME_FIELD)
-        .bind(request.getProjectId())
-        .to(PROJECT_ID_FIELD)
-        .bind(request.getNeighbor().getRelationshipContext())
-        .to(RELATIONSHIP_CONTEXT_FIELD)
-        .run();
+    log.debug("Executed Query={}", resultSummary.query().toString());
   }
 
   private static String generateRegisterDetachedResourceQuery(

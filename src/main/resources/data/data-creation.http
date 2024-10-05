@@ -1,0 +1,512 @@
+### Created Detached Resource
+#@project_id = "1d631ef8-6b20-41c6-8a38-7581e84e7686"
+
+< {%
+    client.global.set("project_id", $random.uuid.toString())
+    client.global.set("B1", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-detached
+Content-Type: application/json
+
+{
+  "id": "{{B1}}",
+  "name": "B1",
+  "projectId": "{{project_id}}",
+  "additionalLabels": ["B"]
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("B2", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-detached
+Content-Type: application/json
+
+{
+  "id": "{{B2}}",
+  "name": "B2",
+  "projectId": "{{project_id}}",
+  "additionalLabels": ["B"]
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+### Created Neighbor Resources
+< {%
+    client.global.set("S1", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{B1}}",
+  "neighbor": {
+    "id": "{{S1}}",
+    "name": "S1",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("S2", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{B1}}",
+  "neighbor": {
+    "id": "{{S2}}",
+    "name": "S2",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E1", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{B1}}",
+  "neighbor": {
+    "id": "{{E1}}",
+    "name": "E1",
+    "labels": ["E"],
+    "relationshipContext": "ref",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E2", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{B1}}",
+  "neighbor": {
+    "id": "{{E2}}",
+    "name": "E2",
+    "labels": ["E"],
+    "relationshipContext": "ref",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E3", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S1}}",
+  "neighbor": {
+    "id": "{{E3}}",
+    "name": "E3",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E4", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S2}}",
+  "neighbor": {
+    "id": "{{E4}}",
+    "name": "E4",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("S3", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{B1}}",
+  "neighbor": {
+    "id": "{{S3}}",
+    "name": "S3",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("S4", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{B1}}",
+  "neighbor": {
+    "id": "{{S4}}",
+    "name": "S4",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("S5", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{B1}}",
+  "neighbor": {
+    "id": "{{S5}}",
+    "name": "S5",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("S6", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{B1}}",
+  "neighbor": {
+    "id": "{{S6}}",
+    "name": "S6",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E5", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S3}}",
+  "neighbor": {
+    "id": "{{E5}}",
+    "name": "E5",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E6", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S4}}",
+  "neighbor": {
+    "id": "{{E6}}",
+    "name": "E6",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E7", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S5}}",
+  "neighbor": {
+    "id": "{{E7}}",
+    "name": "E7",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E8", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S6}}",
+  "neighbor": {
+    "id": "{{E8}}",
+    "name": "E8",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("M1", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{B1}}",
+  "neighbor": {
+    "id": "{{M1}}",
+    "name": "M1",
+    "labels": ["M"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("M2", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{B1}}",
+  "neighbor": {
+    "id": "{{M2}}",
+    "name": "M2",
+    "labels": ["M"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("S7", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{M1}}",
+  "neighbor": {
+    "id": "{{S7}}",
+    "name": "S7",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("S8", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{M2}}",
+  "neighbor": {
+    "id": "{{S8}}",
+    "name": "S8",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
