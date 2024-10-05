@@ -1,8 +1,6 @@
 ### Created Detached Resource
-#@project_id = "1d631ef8-6b20-41c6-8a38-7581e84e7686"
-
 < {%
-    client.global.set("project_id", $random.uuid.toString())
+    client.global.clearAll()
     client.global.set("B1", $random.uuid.toString())
 %}
 POST http://localhost:8080/register-detached
@@ -11,27 +9,6 @@ Content-Type: application/json
 {
   "id": "{{B1}}",
   "name": "B1",
-  "projectId": "{{project_id}}",
-  "additionalLabels": ["B"]
-}
-
-> {%
-    client.test("Status code is 200", function () {
-        console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
-    });
-%}
-
-###
-< {%
-    client.global.set("B2", $random.uuid.toString())
-%}
-POST http://localhost:8080/register-detached
-Content-Type: application/json
-
-{
-  "id": "{{B2}}",
-  "name": "B2",
   "projectId": "{{project_id}}",
   "additionalLabels": ["B"]
 }
