@@ -21,6 +21,7 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
   private static final String RESOURCE_ID_FIELD = "id";
   private static final String RELATIONSHIP_CONTEXT_FIELD = "context";
   private static final String TARGET_RESOURCE_ID_FIELD = "targetId";
+  private static final String FILTER_CONTEXTS_FIELD = "filterContexts";
   @Autowired private Neo4jClient neo4jClient;
 
   @Override
@@ -58,13 +59,14 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
   @Override
   public ResourceLineage fetchLineage(FetchLineageRequest request) {
     String query = generateFetchLineageQuery(request);
-    log.info(query);
     Set<Resource> resources =
         new HashSet<>(
             neo4jClient
                 .query(query)
                 .bind(request.getTargetResourceId())
                 .to(TARGET_RESOURCE_ID_FIELD)
+                .bind(request.getFilterContexts())
+                .to(FILTER_CONTEXTS_FIELD)
                 .fetchAs(Resource.class)
                 .mappedBy(
                     (typeSystem, record) -> {
