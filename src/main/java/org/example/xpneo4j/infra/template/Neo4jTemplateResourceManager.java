@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.example.xpneo4j.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
   private static final String RELATIONSHIP_CONTEXT_FIELD = "context";
   private static final String TARGET_RESOURCE_ID_FIELD = "targetId";
   private static final String FILTER_CONTEXTS_FIELD = "filterContexts";
+  private static final String TARGET_RESOURCE_CUSTOM_LABELS = ":TargetCustomLabels";
+  private static final String NEIGHBOR_CUSTOM_LABELS = ":NeighborCustomLabels";
+  private static final String CUSTOM_LABELS = ":CustomLabels";
+  private static final String RELATION_CUSTOM_LABELS = ":RelationCustomLabels";
+  private static final String RELATION_CUSTOM_LABEL = ":RelationCustomLabel";
   @Autowired private Neo4jClient neo4jClient;
 
   @Override
@@ -83,28 +89,37 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
 
   private String generateFetchLineageQuery(FetchLineageRequest request) {
     return fetchQuery("fetchResourceLineage.cypher")
-        .replace(":TargetCustomLabels", constructResourceLabels(request.getProjectId(), Set.of()))
         .replace(
-            ":NeighborCustomLabels",
-            constructResourceDisjunctionLabels(request.getFilterResourceTypes()));
+            TARGET_RESOURCE_CUSTOM_LABELS,
+            constructResourceLabels(request.getProjectId(), Set.of()))
+        .replace(
+            RELATION_CUSTOM_LABELS,
+            constructDisjunctionLabels(
+                request.getFilterRelationshipTypes().stream()
+                    .map(RelationshipType::name)
+                    .collect(Collectors.toSet())))
+        .replace(
+            NEIGHBOR_CUSTOM_LABELS, constructDisjunctionLabels(request.getFilterResourceTypes()));
   }
 
   private static String generateRegisterDetachedResourceQuery(
       RegisterDetachedResourceRequest request) {
     return fetchQuery("registerDetachedResource.cypher")
         .replace(
-            ":CustomLabels",
+            CUSTOM_LABELS,
             constructResourceLabels(request.getProjectId(), request.getAdditionalLabels()));
   }
 
   private static String generateRegisterNeighborQuery(RegisterNeighborRequest request) {
     return fetchQuery("registerNeighborResource.cypher")
-        .replace(":TargetCustomLabels", constructResourceLabels(request.getProjectId(), Set.of()))
         .replace(
-            ":NeighborCustomLabels",
+            TARGET_RESOURCE_CUSTOM_LABELS,
+            constructResourceLabels(request.getProjectId(), Set.of()))
+        .replace(
+            NEIGHBOR_CUSTOM_LABELS,
             constructResourceLabels(request.getProjectId(), request.getNeighbor().getLabels()))
         .replace(
-            ":RelationCustomLabel",
+            RELATION_CUSTOM_LABEL,
             constructRelationshipLabel(request.getNeighbor().getRelationshipLabel()));
   }
 
@@ -117,7 +132,7 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
     return labelBuilder.toString();
   }
 
-  private static String constructResourceDisjunctionLabels(Set<String> labels) {
+  private static String constructDisjunctionLabels(Set<String> labels) {
     StringBuilder labelBuilder = new StringBuilder();
     labelBuilder.append(":");
     for (String label : labels) {

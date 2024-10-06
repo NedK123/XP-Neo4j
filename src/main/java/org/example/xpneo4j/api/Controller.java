@@ -1,5 +1,6 @@
 package org.example.xpneo4j.api;
 
+import java.util.Objects;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import org.example.xpneo4j.core.*;
@@ -30,15 +31,36 @@ public class Controller {
   public ResponseEntity<ResourceLineage> fetchLineage(
       @RequestParam String targetResourceId,
       @RequestParam String projectId,
-      @RequestParam Set<String> filterResourceTypes,
-      @RequestParam Set<String> filterContexts) {
+      @RequestParam(required = false) Set<String> filterResourceTypes,
+      @RequestParam(required = false) Set<RelationshipType> filterRelationshipTypes,
+      @RequestParam(required = false) Set<String> filterContexts) {
     FetchLineageRequest request =
-        FetchLineageRequest.builder()
-            .targetResourceId(targetResourceId)
-            .projectId(projectId)
-            .filterResourceTypes(filterResourceTypes)
-            .filterContexts(filterContexts)
-            .build();
+        buildLineageRequest(
+            targetResourceId,
+            projectId,
+            filterRelationshipTypes,
+            filterResourceTypes,
+            filterContexts);
     return ResponseEntity.ok(resourceFetcher.fetchLineage(request));
+  }
+
+  private static FetchLineageRequest buildLineageRequest(
+      String targetResourceId,
+      String projectId,
+      Set<RelationshipType> filterRelationshipTypes,
+      Set<String> filterResourceTypes,
+      Set<String> filterContexts) {
+    FetchLineageRequest.FetchLineageRequestBuilder requestBuilder =
+        FetchLineageRequest.builder().targetResourceId(targetResourceId).projectId(projectId);
+    if (Objects.nonNull(filterResourceTypes)) {
+      requestBuilder.filterResourceTypes(filterResourceTypes);
+    }
+    if (Objects.nonNull(filterRelationshipTypes)) {
+      requestBuilder.filterRelationshipTypes(filterRelationshipTypes);
+    }
+    if (Objects.nonNull(filterContexts)) {
+      requestBuilder.filterContexts(filterContexts);
+    }
+    return requestBuilder.build();
   }
 }
