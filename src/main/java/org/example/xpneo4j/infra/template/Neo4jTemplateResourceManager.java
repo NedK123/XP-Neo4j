@@ -3,14 +3,10 @@ package org.example.xpneo4j.infra.template;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.Set;
-
 import lombok.extern.slf4j.Slf4j;
-import org.example.xpneo4j.core.RegisterDetachedResourceRequest;
-import org.example.xpneo4j.core.RegisterNeighborRequest;
-import org.example.xpneo4j.core.RelationshipType;
-import org.example.xpneo4j.core.ResourceCreator;
-import org.neo4j.driver.summary.ResultSummary;
+import org.example.xpneo4j.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.neo4j.core.Neo4jClient;
@@ -19,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @ConditionalOnProperty(name = "myapp.persistence.strategy", havingValue = "template")
-public class Neo4jTemplateResourceManager implements ResourceCreator {
+public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFetcher {
   private static final String PROJECT_ID_FIELD = "projectId";
   private static final String RESOURCE_NAME_FIELD = "name";
   private static final String RESOURCE_ID_FIELD = "id";
@@ -44,21 +40,51 @@ public class Neo4jTemplateResourceManager implements ResourceCreator {
   @Override
   public void register(RegisterNeighborRequest request) {
     String query = generateRegisterNeighborQuery(request);
-    ResultSummary resultSummary = neo4jClient
-            .query(query)
-            .bind(request.getTargetResourceId())
-            .to(TARGET_RESOURCE_ID_FIELD)
-            .bind(request.getNeighbor().getId())
-            .to(RESOURCE_ID_FIELD)
-            .bind(request.getNeighbor().getName())
-            .to(RESOURCE_NAME_FIELD)
-            .bind(request.getProjectId())
-            .to(PROJECT_ID_FIELD)
-            .bind(request.getNeighbor().getRelationshipContext())
-            .to(RELATIONSHIP_CONTEXT_FIELD)
-            .run();
+    neo4jClient
+        .query(query)
+        .bind(request.getTargetResourceId())
+        .to(TARGET_RESOURCE_ID_FIELD)
+        .bind(request.getNeighbor().getId())
+        .to(RESOURCE_ID_FIELD)
+        .bind(request.getNeighbor().getName())
+        .to(RESOURCE_NAME_FIELD)
+        .bind(request.getProjectId())
+        .to(PROJECT_ID_FIELD)
+        .bind(request.getNeighbor().getRelationshipContext())
+        .to(RELATIONSHIP_CONTEXT_FIELD)
+        .run();
+  }
 
-    log.debug("Executed Query={}", resultSummary.query().toString());
+  @Override
+  public ResourceLineage fetchLineage(FetchLineageRequest request) {
+    String query = generateFetchLineageQuery(request);
+    log.info(query);
+    Set<Resource> resources =
+        new HashSet<>(
+            neo4jClient
+                .query(query)
+                .bind(request.getTargetResourceId())
+                .to(TARGET_RESOURCE_ID_FIELD)
+                .fetchAs(Resource.class)
+                .mappedBy(
+                    (typeSystem, record) -> {
+                      var node = record.get("n").asNode();
+                      String id = node.get("id").asString();
+                      String name = node.get("name").asString();
+                      Set<String> labels = new HashSet<>();
+                      node.labels().forEach(labels::add);
+                      return Resource.builder().id(id).name(name).labels(labels).build();
+                    })
+                .all());
+    return ResourceLineage.builder().resources(resources).build();
+  }
+
+  private String generateFetchLineageQuery(FetchLineageRequest request) {
+    return fetchQuery("fetchResourceLineage.cypher")
+        .replace(":TargetCustomLabels", constructResourceLabels(request.getProjectId(), Set.of()))
+        .replace(
+            ":NeighborCustomLabels",
+            constructResourceDisjunctionLabels(request.getFilterResourceTypes()));
   }
 
   private static String generateRegisterDetachedResourceQuery(
@@ -86,6 +112,17 @@ public class Neo4jTemplateResourceManager implements ResourceCreator {
     for (String label : additionalLabels) {
       labelBuilder.append(":").append(label);
     }
+    return labelBuilder.toString();
+  }
+
+  private static String constructResourceDisjunctionLabels(Set<String> labels) {
+    StringBuilder labelBuilder = new StringBuilder();
+    labelBuilder.append(":");
+    for (String label : labels) {
+      labelBuilder.append(label);
+      labelBuilder.append("|");
+    }
+    labelBuilder.deleteCharAt(labelBuilder.length() - 1);
     return labelBuilder.toString();
   }
 

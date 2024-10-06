@@ -10,6 +10,5 @@ import lombok.*;
 public class Resource {
   @NonNull private String id;
   @NonNull private String name;
-  @NonNull private String projectId;
   @Builder.Default private Set<String> labels = Set.of();
 }

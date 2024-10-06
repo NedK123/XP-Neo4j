@@ -48,18 +48,96 @@ Content-Type: application/json
 
 ###
 < {%
-    client.global.set("S2", $random.uuid.toString())
+    client.global.set("S1R", $random.uuid.toString())
 %}
 POST http://localhost:8080/register-neighbor
 Content-Type: application/json
 
 {
   "projectId": "{{project_id}}",
-  "targetResourceId": "{{B1}}",
+  "targetResourceId": "{{S1}}",
   "neighbor": {
-    "id": "{{S2}}",
-    "name": "S2",
+    "id": "{{S1R}}",
+    "name": "S1R",
     "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "REPUSH_OF"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E3R", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S1R}}",
+  "neighbor": {
+    "id": "{{E3R}}",
+    "name": "E3R",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("S1RR", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S1R}}",
+  "neighbor": {
+    "id": "{{S1RR}}",
+    "name": "S1RR",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "REPUSH_OF"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E3RR", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S1RR}}",
+  "neighbor": {
+    "id": "{{E3RR}}",
+    "name": "E3RR",
+    "labels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -88,6 +166,32 @@ Content-Type: application/json
     "labels": ["E"],
     "relationshipContext": "ref",
     "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E1R", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{E1}}",
+  "neighbor": {
+    "id": "{{E1R}}",
+    "name": "E1R",
+    "labels": ["E"],
+    "relationshipContext": "ref",
+    "relationshipLabel": "REPUSH_OF"
   }
 }
 
@@ -230,6 +334,110 @@ Content-Type: application/json
 
 ###
 < {%
+    client.global.set("S4R", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S4}}",
+  "neighbor": {
+    "id": "{{S4R}}",
+    "name": "S4R",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "REPUSH_OF"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E6R", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S4R}}",
+  "neighbor": {
+    "id": "{{E6R}}",
+    "name": "E6R",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("S4RR", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S4R}}",
+  "neighbor": {
+    "id": "{{S4RR}}",
+    "name": "S4RR",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "REPUSH_OF"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E6RR", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S4RR}}",
+  "neighbor": {
+    "id": "{{E6RR}}",
+    "name": "E6RR",
+    "labels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
     client.global.set("S5", $random.uuid.toString())
 %}
 POST http://localhost:8080/register-neighbor
@@ -242,6 +450,59 @@ Content-Type: application/json
     "id": "{{S5}}",
     "name": "S5",
     "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+
+###
+< {%
+    client.global.set("S5R", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S5}}",
+  "neighbor": {
+    "id": "{{S5R}}",
+    "name": "S5R",
+    "labels": ["S"],
+    "relationshipContext": "default",
+    "relationshipLabel": "REPUSH_OF"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("E7R", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{S5R}}",
+  "neighbor": {
+    "id": "{{E7R}}",
+    "name": "E7R",
+    "labels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
