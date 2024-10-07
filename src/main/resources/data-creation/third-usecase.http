@@ -1,6 +1,5 @@
 ### Created Detached Resource
 < {%
-    client.global.clearAll()
     client.global.set("B3", $random.uuid.toString())
 %}
 POST http://localhost:8080/register-detached
