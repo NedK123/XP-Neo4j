@@ -1,8 +1,7 @@
 package org.example.xpneo4j.infra.neo4jclient;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import static org.example.xpneo4j.infra.QueryUtilities.*;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,6 +31,7 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
 
   @Override
   public void register(RegisterDetachedResourceRequest request) {
+    log.info("Registering detached node for request={}", request);
     String query = generateRegisterDetachedResourceQuery(request);
     neo4jClient
         .query(query)
@@ -46,6 +46,7 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
 
   @Override
   public void register(RegisterNeighborRequest request) {
+    log.info("Registering neighbor node for request={}", request);
     String query = generateRegisterNeighborQuery(request);
     neo4jClient
         .query(query)
@@ -64,6 +65,7 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
 
   @Override
   public ResourceLineage fetchLineage(FetchLineageRequest request) {
+    log.info("Fetching lineage for request={}", request);
     String query = generateFetchLineageQuery(request);
     Set<Resource> resources =
         new HashSet<>(
@@ -123,36 +125,7 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
             constructRelationshipLabel(request.getNeighbor().getRelationshipLabel()));
   }
 
-  private static String constructResourceLabels(String projectId, Set<String> additionalLabels) {
-    StringBuilder labelBuilder =
-        new StringBuilder(":Resource:Project_%s".formatted(projectId.replaceAll("-", "_")));
-    for (String label : additionalLabels) {
-      labelBuilder.append(":").append(label);
-    }
-    return labelBuilder.toString();
-  }
-
-  private static String constructDisjunctionLabels(Set<String> labels) {
-    StringBuilder labelBuilder = new StringBuilder();
-    labelBuilder.append(":");
-    for (String label : labels) {
-      labelBuilder.append(label);
-      labelBuilder.append("|");
-    }
-    labelBuilder.deleteCharAt(labelBuilder.length() - 1);
-    return labelBuilder.toString();
-  }
-
   private static String constructRelationshipLabel(RelationshipType type) {
     return ":%s".formatted(type.name());
-  }
-
-  private static String fetchQuery(String queryFileName) {
-    try {
-      return new String(
-          Files.readAllBytes(Paths.get("src/main/resources/persistence/" + queryFileName)));
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
   }
 }

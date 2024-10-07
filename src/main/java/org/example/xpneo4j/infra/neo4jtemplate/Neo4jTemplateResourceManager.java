@@ -1,22 +1,34 @@
 package org.example.xpneo4j.infra.neo4jtemplate;
 
+import static org.example.xpneo4j.infra.QueryUtilities.*;
+
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.example.xpneo4j.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.neo4j.core.Neo4jTemplate;
+import org.springframework.data.neo4j.repository.query.QueryFragmentsAndParameters;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 @ConditionalOnProperty(name = "myapp.persistence.strategy", havingValue = "neo4jtemplate")
 public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFetcher {
+  private static final String TARGET_RESOURCE_CUSTOM_LABELS = ":TargetCustomLabels";
+  private static final String NEIGHBOR_CUSTOM_LABELS = ":NeighborCustomLabels";
+  private static final String RELATION_CUSTOM_LABELS = ":RelationCustomLabels";
+  private static final String TARGET_RESOURCE_ID_FIELD = "targetId";
+  private static final String FILTER_CONTEXTS_FIELD = "filterContexts";
+
   @Autowired private Neo4jTemplate template;
 
   @Override
   public void register(RegisterDetachedResourceRequest request) {
+    log.info("Registering detached node for request={}", request);
     template.save(
         generateResource(
             request.getId(),
@@ -27,6 +39,7 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
 
   @Override
   public void register(RegisterNeighborRequest request) {
+    log.info("Registering neighbor node for request={}", request);
     template
         .findById(request.getTargetResourceId(), ResourceNode.class)
         .ifPresent(
@@ -44,8 +57,46 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
 
   @Override
   public ResourceLineage fetchLineage(FetchLineageRequest request) {
+    log.info("Fetching lineage for request={}", request);
+    QueryFragmentsAndParameters queryFragmentsAndParameters =
+        new QueryFragmentsAndParameters(
+            generateFetchLineageQuery(request),
+            Map.of(
+                TARGET_RESOURCE_ID_FIELD,
+                request.getTargetResourceId(),
+                FILTER_CONTEXTS_FIELD,
+                request.getFilterContexts()));
 
-    return null;
+    Set<Resource> resources =
+        template
+            .toExecutableQuery(ResourceNode.class, queryFragmentsAndParameters)
+            .getResults()
+            .stream()
+            .map(
+                r ->
+                    Resource.builder()
+                        .id(r.getId())
+                        .name(r.getName())
+                        .labels(r.getLabels())
+                        .build())
+            .collect(Collectors.toSet());
+
+    return ResourceLineage.builder().resources(resources).build();
+  }
+
+  private String generateFetchLineageQuery(FetchLineageRequest request) {
+    return fetchQuery("fetchResourceLineage.cypher")
+        .replace(
+            TARGET_RESOURCE_CUSTOM_LABELS,
+            constructResourceLabels(request.getProjectId(), Set.of()))
+        .replace(
+            RELATION_CUSTOM_LABELS,
+            constructDisjunctionLabels(
+                request.getFilterRelationshipTypes().stream()
+                    .map(RelationshipType::name)
+                    .collect(Collectors.toSet())))
+        .replace(
+            NEIGHBOR_CUSTOM_LABELS, constructDisjunctionLabels(request.getFilterResourceTypes()));
   }
 
   private static ResourceNode generateResource(
