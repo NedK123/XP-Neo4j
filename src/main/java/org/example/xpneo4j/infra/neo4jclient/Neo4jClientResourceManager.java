@@ -1,4 +1,4 @@
-package org.example.xpneo4j.infra.template;
+package org.example.xpneo4j.infra.neo4jclient;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "myapp.persistence.strategy", havingValue = "template")
-public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFetcher {
+@ConditionalOnProperty(name = "myapp.persistence.strategy", havingValue = "neo4jclient")
+public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetcher {
   private static final String PROJECT_ID_FIELD = "projectId";
   private static final String RESOURCE_NAME_FIELD = "name";
   private static final String RESOURCE_ID_FIELD = "id";

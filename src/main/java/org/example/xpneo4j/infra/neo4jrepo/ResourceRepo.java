@@ -1,4 +1,4 @@
-package org.example.xpneo4j.infra;
+package org.example.xpneo4j.infra.neo4jrepo;
 
 import java.util.Set;
 import org.example.xpneo4j.core.RegisterNeighborRequest;
