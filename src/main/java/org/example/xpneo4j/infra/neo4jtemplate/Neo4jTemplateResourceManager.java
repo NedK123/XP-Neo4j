@@ -50,7 +50,6 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
                     targetResource.getCreatedUnderRelationships().add(relationship);
                 case REPUSH_OF -> targetResource.getRepushOfRelationships().add(relationship);
               }
-              log.info("Hello {}", targetResource);
               template.save(targetResource);
             });
   }
@@ -102,7 +101,6 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
   private static ResourceNode generateResource(
       String id, String name, String projectId, Set<String> additionalLabels) {
     Set<String> labels = new HashSet<>();
-    labels.add("Resource");
     labels.add("Project_%s".formatted(projectId.replaceAll("-", "_")));
     labels.addAll(additionalLabels);
     return ResourceNode.builder().id(id).name(name).projectId(projectId).labels(labels).build();

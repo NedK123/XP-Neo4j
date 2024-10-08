@@ -45,7 +45,6 @@ spotless {
         target("**/*.gradle.kts")
         ktlint() // for formatting Kotlin Gradle files
     }
-    // Optionally, configure Spotless for other file types, like Java:
     java {
         target("**/*.java")
         googleJavaFormat()
