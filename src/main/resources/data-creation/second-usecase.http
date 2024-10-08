@@ -32,7 +32,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S1p}}",
     "name": "S1p",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -58,7 +58,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S2p}}",
     "name": "S2p",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -84,7 +84,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E1p}}",
     "name": "E1p",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -110,7 +110,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E2p}}",
     "name": "E2p",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -136,7 +136,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S3p}}",
     "name": "S3p",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -162,7 +162,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S4p}}",
     "name": "S4p",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -188,7 +188,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S5p}}",
     "name": "S5p",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -214,7 +214,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S6p}}",
     "name": "S6p",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -240,7 +240,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E3p}}",
     "name": "E3p",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -266,7 +266,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E4p}}",
     "name": "E4p",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -292,7 +292,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E5p}}",
     "name": "E5p",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -318,7 +318,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E6p}}",
     "name": "E6p",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -344,7 +344,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{M1p}}",
     "name": "M1p",
-    "labels": ["M"],
+    "additionalLabels": ["M"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -370,7 +370,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{M2p}}",
     "name": "M2p",
-    "labels": ["M"],
+    "additionalLabels": ["M"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -396,7 +396,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S7p}}",
     "name": "S7p",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -422,7 +422,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S8p}}",
     "name": "S8p",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -448,7 +448,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E7p}}",
     "name": "E7p",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -474,7 +474,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E8p}}",
     "name": "E8p",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }

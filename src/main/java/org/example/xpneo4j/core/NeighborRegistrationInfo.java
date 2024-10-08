@@ -1,19 +1,16 @@
 package org.example.xpneo4j.core;
 
 import java.util.Set;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class NeighborRegistrationInfo {
-  private String id;
-  private String name;
-  private Set<String> labels;
+  @NonNull private String id;
+  @NonNull private String name;
+  @Builder.Default private Set<String> additionalLabels = Set.of();
   @Builder.Default private String relationshipContext = "default";
-  private RelationshipType relationshipLabel;
+  @NonNull private RelationshipType relationshipLabel;
 }

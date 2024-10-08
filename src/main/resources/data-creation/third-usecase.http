@@ -32,7 +32,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E1pp}}",
     "name": "E1pp",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -58,7 +58,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E2pp}}",
     "name": "E2pp",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -85,7 +85,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S1pp}}",
     "name": "S1pp",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -111,7 +111,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S2pp}}",
     "name": "S2pp",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -137,7 +137,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S3pp}}",
     "name": "S3pp",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -163,7 +163,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E3pp}}",
     "name": "E3pp",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -189,7 +189,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E4pp}}",
     "name": "E4pp",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -215,7 +215,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E5pp}}",
     "name": "E5pp",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -241,9 +241,9 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S1ppR}}",
     "name": "S1ppR",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPUSH_OF"
+    "relationshipLabel": "REPRODUCTION_OF"
   }
 }
 
@@ -267,7 +267,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E3ppR}}",
     "name": "E3ppR",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -293,9 +293,9 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S2ppR}}",
     "name": "S2ppR",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPUSH_OF"
+    "relationshipLabel": "REPRODUCTION_OF"
   }
 }
 
@@ -319,7 +319,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E4ppR}}",
     "name": "E4ppR",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -345,7 +345,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{M1pp}}",
     "name": "M1pp",
-    "labels": ["M"],
+    "additionalLabels": ["M"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -371,7 +371,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{M2pp}}",
     "name": "M2pp",
-    "labels": ["M"],
+    "additionalLabels": ["M"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -397,7 +397,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S4pp}}",
     "name": "S4pp",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -423,7 +423,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S5pp}}",
     "name": "S5pp",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -449,7 +449,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E6pp}}",
     "name": "E6pp",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -475,7 +475,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E7pp}}",
     "name": "E7pp",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -501,9 +501,9 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E1ppR}}",
     "name": "E1ppR",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPUSH_OF"
+    "relationshipLabel": "REPRODUCTION_OF"
   }
 }
 

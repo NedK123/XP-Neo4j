@@ -32,7 +32,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S1}}",
     "name": "S1",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -58,7 +58,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S2}}",
     "name": "S2",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -84,9 +84,9 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S1R}}",
     "name": "S1R",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPUSH_OF"
+    "relationshipLabel": "REPRODUCTION_OF"
   }
 }
 
@@ -110,7 +110,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E3R}}",
     "name": "E3R",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -136,9 +136,9 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S1RR}}",
     "name": "S1RR",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPUSH_OF"
+    "relationshipLabel": "REPRODUCTION_OF"
   }
 }
 
@@ -162,7 +162,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E3RR}}",
     "name": "E3RR",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -188,7 +188,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E1}}",
     "name": "E1",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "ref",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -214,9 +214,9 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E1R}}",
     "name": "E1R",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "ref",
-    "relationshipLabel": "REPUSH_OF"
+    "relationshipLabel": "REPRODUCTION_OF"
   }
 }
 
@@ -240,7 +240,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E2}}",
     "name": "E2",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "ref",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -266,7 +266,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E3}}",
     "name": "E3",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -292,7 +292,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E4}}",
     "name": "E4",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -318,7 +318,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S3}}",
     "name": "S3",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -344,7 +344,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S4}}",
     "name": "S4",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -370,9 +370,9 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S4R}}",
     "name": "S4R",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPUSH_OF"
+    "relationshipLabel": "REPRODUCTION_OF"
   }
 }
 
@@ -396,7 +396,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E6R}}",
     "name": "E6R",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -422,9 +422,9 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S4RR}}",
     "name": "S4RR",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPUSH_OF"
+    "relationshipLabel": "REPRODUCTION_OF"
   }
 }
 
@@ -448,7 +448,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E6RR}}",
     "name": "E6RR",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -474,7 +474,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S5}}",
     "name": "S5",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -501,9 +501,9 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S5R}}",
     "name": "S5R",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPUSH_OF"
+    "relationshipLabel": "REPRODUCTION_OF"
   }
 }
 
@@ -527,7 +527,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E7R}}",
     "name": "E7R",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -553,7 +553,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S6}}",
     "name": "S6",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -579,7 +579,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E5}}",
     "name": "E5",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -605,7 +605,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E6}}",
     "name": "E6",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -631,7 +631,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E7}}",
     "name": "E7",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -657,7 +657,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E8}}",
     "name": "E8",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -683,7 +683,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{M1}}",
     "name": "M1",
-    "labels": ["M"],
+    "additionalLabels": ["M"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -709,7 +709,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{M2}}",
     "name": "M2",
-    "labels": ["M"],
+    "additionalLabels": ["M"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -735,7 +735,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S7}}",
     "name": "S7",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -761,7 +761,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{S8}}",
     "name": "S8",
-    "labels": ["S"],
+    "additionalLabels": ["S"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -787,7 +787,7 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E9}}",
     "name": "E9",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }
@@ -813,7 +813,33 @@ Content-Type: application/json
   "neighbor": {
     "id": "{{E10}}",
     "name": "E10",
-    "labels": ["E"],
+    "additionalLabels": ["E"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
+
+###
+< {%
+    client.global.set("D1", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{E9}}",
+  "neighbor": {
+    "id": "{{D1}}",
+    "name": "D1",
+    "additionalLabels": ["D"],
     "relationshipContext": "default",
     "relationshipLabel": "CREATED_UNDER"
   }

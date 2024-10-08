@@ -1,4 +1,4 @@
-package org.example.xpneo4j.infra;
+package org.example.xpneo4j.infra.shared;
 
 import java.io.IOException;
 import java.nio.file.Files;

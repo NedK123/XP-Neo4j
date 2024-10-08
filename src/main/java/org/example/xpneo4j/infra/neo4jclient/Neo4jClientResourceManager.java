@@ -1,6 +1,6 @@
 package org.example.xpneo4j.infra.neo4jclient;
 
-import static org.example.xpneo4j.infra.QueryUtilities.*;
+import static org.example.xpneo4j.infra.shared.QueryUtilities.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -119,7 +119,8 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
             constructResourceLabels(request.getProjectId(), Set.of()))
         .replace(
             NEIGHBOR_CUSTOM_LABELS,
-            constructResourceLabels(request.getProjectId(), request.getNeighbor().getLabels()))
+            constructResourceLabels(
+                request.getProjectId(), request.getNeighbor().getAdditionalLabels()))
         .replace(
             RELATION_CUSTOM_LABEL,
             constructRelationshipLabel(request.getNeighbor().getRelationshipLabel()));

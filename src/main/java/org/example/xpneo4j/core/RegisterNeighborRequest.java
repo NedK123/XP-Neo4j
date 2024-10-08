@@ -1,16 +1,13 @@
 package org.example.xpneo4j.core;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterNeighborRequest {
-  private String projectId;
-  private String targetResourceId;
-  private NeighborRegistrationInfo neighbor;
+  @NonNull private String projectId;
+  @NonNull private String targetResourceId;
+  @NonNull private NeighborRegistrationInfo neighbor;
 }
