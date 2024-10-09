@@ -851,3 +851,29 @@ Content-Type: application/json
         client.assert(response.status === 200, "Expected status code is 200")
     });
 %}
+
+###
+< {%
+    client.global.set("D2", $random.uuid.toString())
+%}
+POST http://localhost:8080/register-neighbor
+Content-Type: application/json
+
+{
+  "projectId": "{{project_id}}",
+  "targetResourceId": "{{E10}}",
+  "neighbor": {
+    "id": "{{D2}}",
+    "name": "D2",
+    "additionalLabels": ["D"],
+    "relationshipContext": "default",
+    "relationshipLabel": "CREATED_UNDER"
+  }
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        console.log(request.body())
+        client.assert(response.status === 200, "Expected status code is 200")
+    });
+%}
