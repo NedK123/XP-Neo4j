@@ -6,3 +6,4 @@ services:
       - "7687:7687"    # Bolt
     environment:
       - 'NEO4J_AUTH=neo4j/notverysecret'
+      - 'NEO4J_dbms_default__database=resources-database'

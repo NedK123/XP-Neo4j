@@ -31,6 +31,8 @@ You can still run the migrations manually using the liquibase command line tool 
 
 #### References
 - [Neo4j plugin for Liquibase](https://neo4j.com/labs/liquibase/)
+- [Liquibase-neo4j tutorial](https://contribute.liquibase.com/extensions-integrations/directory/database-tutorials/neo4j/#__tabbed_1_3)
+- [Liquibase-neo4j another tutorial](https://www.youtube.com/watch?v=sZDcK910i34)
 - [Deprecation of Liquigraph](https://www.liquigraph.org/migration-to-liquibase/)
 
 ### Neo4j-Migrations (chosen)
