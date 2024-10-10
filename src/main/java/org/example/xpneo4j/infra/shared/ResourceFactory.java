@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.example.xpneo4j.core.RegisterDetachedResourceRequest;
 import org.example.xpneo4j.core.RegisterNeighborRequest;
+import org.example.xpneo4j.core.RelationshipType;
 import org.example.xpneo4j.infra.neo4jtemplate.ResourceNode;
 import org.example.xpneo4j.infra.neo4jtemplate.ResourceRelationship;
 
@@ -14,15 +15,34 @@ public class ResourceFactory {
         request.getId(), request.getName(), request.getProjectId(), request.getAdditionalLabels());
   }
 
-  public static ResourceRelationship generateRelationshipWithNeighbor(
-      RegisterNeighborRequest request) {
+  public static ResourceNode generateNeighbor(
+      ResourceNode targetResource, RegisterNeighborRequest request) {
     ResourceNode neighbor =
         generateResource(
             request.getNeighbor().getId(),
             request.getNeighbor().getName(),
             request.getProjectId(),
             request.getNeighbor().getAdditionalLabels());
-    return ResourceFactory.generateRelationship(request, neighbor);
+    neighbor.addRelationshipWithNeighbor(
+        generateRelationship(request, targetResource), request.getNeighbor().getRelationshipType());
+    if (shouldInheritCreationContextOfTargetResource(request)) {
+      neighbor.addRelationshipWithNeighbor(
+          cloneRelation(targetResource.getCreatedUnderRelationship()),
+          RelationshipType.CREATED_UNDER);
+    }
+    return neighbor;
+  }
+
+  private static boolean shouldInheritCreationContextOfTargetResource(
+      RegisterNeighborRequest request) {
+    return request.getNeighbor().isInheritCreationConnectionFromTarget();
+  }
+
+  private static ResourceRelationship cloneRelation(ResourceRelationship relationship) {
+    return ResourceRelationship.builder()
+        .context(relationship.getContext())
+        .neighbor(relationship.getNeighbor())
+        .build();
   }
 
   private static ResourceRelationship generateRelationship(

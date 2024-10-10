@@ -9,7 +9,7 @@ Content-Type: application/json
   "id": "{{B3}}",
   "name": "B3",
   "projectId": "{{project_id}}",
-  "additionalLabels": ["B"]
+  "additionalLabels": ["B", "BaseResource"]
 }
 
 > {%
@@ -34,7 +34,7 @@ Content-Type: application/json
     "name": "E1pp",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -60,7 +60,7 @@ Content-Type: application/json
     "name": "E2pp",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -87,7 +87,7 @@ Content-Type: application/json
     "name": "S1pp",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -113,7 +113,7 @@ Content-Type: application/json
     "name": "S2pp",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -139,7 +139,7 @@ Content-Type: application/json
     "name": "S3pp",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -165,7 +165,7 @@ Content-Type: application/json
     "name": "E3pp",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -191,7 +191,7 @@ Content-Type: application/json
     "name": "E4pp",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -217,7 +217,7 @@ Content-Type: application/json
     "name": "E5pp",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -243,7 +243,7 @@ Content-Type: application/json
     "name": "S1ppR",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPRODUCTION_OF"
+    "relationshipType": "REPRODUCTION_OF"
   }
 }
 
@@ -269,7 +269,7 @@ Content-Type: application/json
     "name": "E3ppR",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -295,7 +295,7 @@ Content-Type: application/json
     "name": "S2ppR",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPRODUCTION_OF"
+    "relationshipType": "REPRODUCTION_OF"
   }
 }
 
@@ -321,7 +321,7 @@ Content-Type: application/json
     "name": "E4ppR",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -347,7 +347,7 @@ Content-Type: application/json
     "name": "M1pp",
     "additionalLabels": ["M"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -373,7 +373,7 @@ Content-Type: application/json
     "name": "M2pp",
     "additionalLabels": ["M"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -399,7 +399,7 @@ Content-Type: application/json
     "name": "S4pp",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -425,7 +425,7 @@ Content-Type: application/json
     "name": "S5pp",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -451,7 +451,7 @@ Content-Type: application/json
     "name": "E6pp",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -477,7 +477,7 @@ Content-Type: application/json
     "name": "E7pp",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -503,7 +503,7 @@ Content-Type: application/json
     "name": "E1ppR",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "REPRODUCTION_OF"
+    "relationshipType": "REPRODUCTION_OF"
   }
 }
 

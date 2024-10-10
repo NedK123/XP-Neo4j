@@ -9,7 +9,7 @@ Content-Type: application/json
   "id": "{{B2}}",
   "name": "B2",
   "projectId": "{{project_id}}",
-  "additionalLabels": ["B"]
+  "additionalLabels": ["B", "BaseResource"]
 }
 
 > {%
@@ -34,7 +34,7 @@ Content-Type: application/json
     "name": "S1p",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -60,7 +60,7 @@ Content-Type: application/json
     "name": "S2p",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -86,7 +86,7 @@ Content-Type: application/json
     "name": "E1p",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -112,7 +112,7 @@ Content-Type: application/json
     "name": "E2p",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -138,7 +138,7 @@ Content-Type: application/json
     "name": "S3p",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -164,7 +164,7 @@ Content-Type: application/json
     "name": "S4p",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -190,7 +190,7 @@ Content-Type: application/json
     "name": "S5p",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -216,7 +216,7 @@ Content-Type: application/json
     "name": "S6p",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -242,7 +242,7 @@ Content-Type: application/json
     "name": "E3p",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -268,7 +268,7 @@ Content-Type: application/json
     "name": "E4p",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -294,7 +294,7 @@ Content-Type: application/json
     "name": "E5p",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -320,7 +320,7 @@ Content-Type: application/json
     "name": "E6p",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -346,7 +346,7 @@ Content-Type: application/json
     "name": "M1p",
     "additionalLabels": ["M"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -372,7 +372,7 @@ Content-Type: application/json
     "name": "M2p",
     "additionalLabels": ["M"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -398,7 +398,7 @@ Content-Type: application/json
     "name": "S7p",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -424,7 +424,7 @@ Content-Type: application/json
     "name": "S8p",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -450,7 +450,7 @@ Content-Type: application/json
     "name": "E7p",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 
@@ -476,7 +476,7 @@ Content-Type: application/json
     "name": "E8p",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipLabel": "CREATED_UNDER"
+    "relationshipType": "CREATED_UNDER"
   }
 }
 

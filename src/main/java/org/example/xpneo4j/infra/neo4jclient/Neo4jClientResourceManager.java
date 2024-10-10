@@ -4,9 +4,10 @@ import static org.example.xpneo4j.infra.shared.QueryUtilities.*;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.example.xpneo4j.core.*;
+import org.neo4j.driver.types.Node;
+import org.neo4j.driver.types.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.neo4j.core.Neo4jClient;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "myapp.persistence.strategy", havingValue = "neo4jclient")
+@ConditionalOnProperty(name = "myapp.persistence.strategy", havingValue = "neo4jClient")
 public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetcher {
   private static final String PROJECT_ID_FIELD = "projectId";
   private static final String RESOURCE_NAME_FIELD = "name";
@@ -64,44 +65,40 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
   }
 
   @Override
-  public ResourceLineage fetchLineage(FetchLineageRequest request) {
+  public LineageResponse fetchLineage(FetchLineageRequest request) {
     log.info("Fetching lineage for request={}", request);
     String query = generateFetchLineageQuery(request);
-    Set<Resource> resources =
-        new HashSet<>(
-            neo4jClient
-                .query(query)
-                .bind(request.getTargetResourceId())
-                .to(TARGET_RESOURCE_ID_FIELD)
-                .bind(request.getFilterContexts())
-                .to(FILTER_CONTEXTS_FIELD)
-                .fetchAs(Resource.class)
-                .mappedBy(
-                    (typeSystem, record) -> {
-                      var node = record.get("n").asNode();
-                      String id = node.get("id").asString();
-                      String name = node.get("name").asString();
-                      Set<String> labels = new HashSet<>();
-                      node.labels().forEach(labels::add);
-                      return Resource.builder().id(id).name(name).labels(labels).build();
-                    })
-                .all());
-    return ResourceLineage.builder().resources(resources).build();
+    Path path;
+//    Set<LineageResource> resources =
+//        new HashSet<>(
+//            neo4jClient
+//                .query(query)
+//                .bind(request.getTargetResourceId())
+//                .to(TARGET_RESOURCE_ID_FIELD)
+//                .fetchAs(LineageResource.class)
+//                .mappedBy(
+//                    (typeSystem, record) -> {
+//                      path = record.get("path").asPath();
+//                      for (Node node : path.nodes()) {
+//                        String id = node.get("id").asString();
+//                        String name = node.get("name").asString();
+//                        Set<String> labels = new HashSet<>();
+//                        node.labels().forEach(labels::add);
+//                        return LineageResource.builder().id(id).name(name).types(labels).build();
+//                      }
+//                      var node = record.get("n").asNode();
+//                      String id = node.get("id").asString();
+//                      String name = node.get("name").asString();
+//                      Set<String> labels = new HashSet<>();
+//                      node.labels().forEach(labels::add);
+//                      return Resource.builder().id(id).name(name).labels(labels).build();
+//                    })
+//                .all());
+    return LineageResponse.builder().build();
   }
 
   private String generateFetchLineageQuery(FetchLineageRequest request) {
-    return fetchQuery("fetchResourceLineage.cypher")
-        .replace(
-            TARGET_RESOURCE_CUSTOM_LABELS,
-            constructResourceLabels(request.getProjectId(), Set.of()))
-        .replace(
-            RELATION_CUSTOM_LABELS,
-            constructDisjunctionLabels(
-                request.getFilterRelationshipTypes().stream()
-                    .map(RelationshipType::name)
-                    .collect(Collectors.toSet())))
-        .replace(
-            NEIGHBOR_CUSTOM_LABELS, constructDisjunctionLabels(request.getFilterResourceTypes()));
+    return fetchQuery("fetchResourceLineage.cypher");
   }
 
   private static String generateRegisterDetachedResourceQuery(
@@ -123,10 +120,10 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
                 request.getProjectId(), request.getNeighbor().getAdditionalLabels()))
         .replace(
             RELATION_CUSTOM_LABEL,
-            constructRelationshipLabel(request.getNeighbor().getRelationshipLabel()));
+            constructrelationshipType(request.getNeighbor().getRelationshipType()));
   }
 
-  private static String constructRelationshipLabel(RelationshipType type) {
+  private static String constructrelationshipType(RelationshipType type) {
     return ":%s".formatted(type.name());
   }
 }

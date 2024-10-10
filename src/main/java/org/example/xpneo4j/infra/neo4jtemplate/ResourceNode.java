@@ -20,13 +20,11 @@ public class ResourceNode {
 
   @Builder.Default @DynamicLabels private Set<String> labels = Set.of();
 
-  @Builder.Default
   @Relationship(type = "CREATED_UNDER", direction = Relationship.Direction.OUTGOING)
-  private Set<ResourceRelationship> createdUnderRelationships = Set.of();
+  private ResourceRelationship createdUnderRelationship;
 
-  @Builder.Default
   @Relationship(type = "REPRODUCTION_OF", direction = Relationship.Direction.OUTGOING)
-  private Set<ResourceRelationship> reproductionOfRelationships = Set.of();
+  private ResourceRelationship reproductionOfRelationship;
 
   @Builder.Default
   @Relationship(type = "USED_BY", direction = Relationship.Direction.OUTGOING)
@@ -35,8 +33,8 @@ public class ResourceNode {
   public void addRelationshipWithNeighbor(
       ResourceRelationship relationship, RelationshipType type) {
     switch (type) {
-      case CREATED_UNDER -> createdUnderRelationships.add(relationship);
-      case REPRODUCTION_OF -> reproductionOfRelationships.add(relationship);
+      case CREATED_UNDER -> createdUnderRelationship = relationship;
+      case REPRODUCTION_OF -> reproductionOfRelationship = relationship;
       case USED_BY -> usedByRelationships.add(relationship);
     }
   }

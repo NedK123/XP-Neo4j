@@ -7,7 +7,7 @@ You have to make sure as well to select an environment for the scripts to read s
 
 ## Persistence Implementation
 The persistence layer is implemented using various ways:
-- Neo4jRepository
+- Neo4jRepo
 - Neo4jTemplate
 - Neo4jClient
 

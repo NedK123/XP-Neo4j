@@ -1,6 +1,5 @@
 package org.example.xpneo4j.core;
 
-import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResourceLineage {
-  @Builder.Default private Set<Resource> resources = Set.of();
+public class LineageResponse {
+  private LineageResource targetResource;
 }

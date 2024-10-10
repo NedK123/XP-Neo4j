@@ -12,5 +12,6 @@ public class NeighborRegistrationInfo {
   @NonNull private String name;
   @Builder.Default private Set<String> additionalLabels = Set.of();
   @Builder.Default private String relationshipContext = "default";
-  @NonNull private RelationshipType relationshipLabel;
+  @NonNull private RelationshipType relationshipType;
+  @Builder.Default private boolean inheritCreationConnectionFromTarget = false;
 }
