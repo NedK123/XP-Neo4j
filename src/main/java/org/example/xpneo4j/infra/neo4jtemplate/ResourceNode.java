@@ -1,5 +1,6 @@
 package org.example.xpneo4j.infra.neo4jtemplate;
 
+import java.util.Optional;
 import java.util.Set;
 import lombok.*;
 import org.example.xpneo4j.core.RelationshipType;
@@ -37,5 +38,9 @@ public class ResourceNode {
       case REPRODUCTION_OF -> reproductionOfRelationship = relationship;
       case USED_BY -> usedByRelationships.add(relationship);
     }
+  }
+
+  public Optional<ResourceNode> getCreationNeighbor() {
+    return Optional.ofNullable(createdUnderRelationship).map(ResourceRelationship::getNeighbor);
   }
 }
