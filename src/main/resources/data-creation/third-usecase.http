@@ -243,7 +243,8 @@ Content-Type: application/json
     "name": "S1ppR",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipType": "REPRODUCTION_OF"
+    "relationshipType": "REPRODUCTION_OF",
+    "inheritCreationConnectionFromTarget": true
   }
 }
 
@@ -295,7 +296,8 @@ Content-Type: application/json
     "name": "S2ppR",
     "additionalLabels": ["S"],
     "relationshipContext": "default",
-    "relationshipType": "REPRODUCTION_OF"
+    "relationshipType": "REPRODUCTION_OF",
+    "inheritCreationConnectionFromTarget": true
   }
 }
 
@@ -503,7 +505,8 @@ Content-Type: application/json
     "name": "E1ppR",
     "additionalLabels": ["E"],
     "relationshipContext": "default",
-    "relationshipType": "REPRODUCTION_OF"
+    "relationshipType": "REPRODUCTION_OF",
+    "inheritCreationConnectionFromTarget": true
   }
 }
 
