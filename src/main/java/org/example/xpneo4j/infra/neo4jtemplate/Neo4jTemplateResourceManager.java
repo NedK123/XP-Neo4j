@@ -4,7 +4,9 @@ import static org.example.xpneo4j.infra.shared.QueryUtilities.*;
 import static org.example.xpneo4j.infra.shared.ResourceFactory.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.example.xpneo4j.core.*;
@@ -46,9 +48,60 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
     return buildLineage(request.getTargetResourceId(), resources);
   }
 
+  @Override
+  public RelativesResponse fetchRelatives(FetchRelativesRequest request) {
+    QueryFragmentsAndParameters query = generateRelativesQuery(request);
+    Set<ResourceNode> relatives =
+        new HashSet<>(template.toExecutableQuery(ResourceNode.class, query).getResults());
+    return buildResponse(relatives, request.getRelativeResourcesTypeFilter());
+  }
+
+  private static RelativesResponse buildResponse(
+      Set<ResourceNode> relatives, Set<String> relativeResourcesTypeFilter) {
+    Map<String, Set<RelativeResource>> map =
+        relativeResourcesTypeFilter.stream()
+            .collect(Collectors.toMap(s -> s, s -> new HashSet<>()));
+    relatives.forEach(
+        relative ->
+            relative
+                .getLabels()
+                .forEach(
+                    label -> {
+                      if (map.containsKey(label)) {
+                        map.get(label).add(buildRelativeResource(relative));
+                      }
+                    }));
+    return RelativesResponse.builder().relatives(map).build();
+  }
+
+  private static RelativeResource buildRelativeResource(ResourceNode relative) {
+    return RelativeResource.builder()
+        .id(relative.getId())
+        .name(relative.getName())
+        .relationshipWithTargetResource(RelativeRelationship.builder().build())
+        .build();
+  }
+
+  private QueryFragmentsAndParameters generateRelativesQuery(FetchRelativesRequest request) {
+    return new QueryFragmentsAndParameters(
+        generateFetchRelativesQuery(request),
+        Map.of(
+            "targetResourceId",
+            request.getTargetResourceId(),
+            "relativeResourcesTypeFilter",
+            request.getRelativeResourcesTypeFilter()));
+  }
+
+  private String generateFetchRelativesQuery(FetchRelativesRequest request) {
+    return fetchQuery("fetchResourceRelatives.cypher")
+        .replace("$ancestorsGenerationLimit", String.valueOf(request.getAncestorsGenerationLimit()))
+        .replace(
+            "$relativesGenerationLimit", String.valueOf(request.getRelativesGenerationLimit()));
+  }
+
   private QueryFragmentsAndParameters generateLineageQuery(FetchLineageRequest request) {
     return new QueryFragmentsAndParameters(
-        generateFetchLineageQuery(request),
+        generateFetchLineageQuery(),
         Map.of(TARGET_RESOURCE_ID_FIELD, request.getTargetResourceId()));
   }
 
@@ -75,7 +128,7 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
         .build();
   }
 
-  private String generateFetchLineageQuery(FetchLineageRequest request) {
+  private String generateFetchLineageQuery() {
     return fetchQuery("fetchResourceLineage.cypher");
   }
 }

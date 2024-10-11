@@ -40,10 +40,17 @@ public class Neo4jRepoResourceManager implements ResourceCreator, ResourceFetche
 
   @Override
   public RelativesResponse fetchRelatives(FetchRelativesRequest request) {
+//    ResourceFamily resourceFamily =
+//        repo.fetchRelatives(
+//            request.getTargetResourceId(),
+//            request.getAncestorsGenerationLimit(),
+//            request.getRelativesGenerationLimit(),
+//            request.getRelativeResourcesTypeFilter());
     return null;
   }
 
-  private static void buildLineage(LineageResource targetLineageResource, ResourceNode resourceNode) {
+  private static void buildLineage(
+      LineageResource targetLineageResource, ResourceNode resourceNode) {
     LineageResource currentLineageResource = targetLineageResource;
     ResourceNode currentResource = resourceNode.getCreationNeighbor().orElse(null);
     while (currentResource != null) {

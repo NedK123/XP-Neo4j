@@ -9,6 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RelativesResponse {
-  @NonNull private String targetResourceId;
+  //  @NonNull private String targetResourceId;
   @Builder.Default private Map<String, Set<RelativeResource>> relatives = Map.of();
 }

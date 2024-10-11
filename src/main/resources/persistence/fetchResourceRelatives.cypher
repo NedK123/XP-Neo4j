@@ -1,7 +1,5 @@
-MATCH path = (:Resource {id: $TargetResourceId})-[*]-()
-WITH nodes(path) AS nodes
-UNWIND nodes AS node
-WITH node
-  WHERE ANY(label IN labels(node) WHERE label IN $RelativeNodeLabels)
-MATCH (node)-[r:CREATED_UNDER {context:$RelationContext}]-()
-RETURN node
+MATCH (t:Resource {id: $targetResourceId})
+MATCH (t)-[:CREATED_UNDER*1..$ancestorsGenerationLimit]->(ancestor)
+MATCH (ancestor)<-[:CREATED_UNDER*1..$relativesGenerationLimit]-(relative)
+  WHERE any(label IN labels(relative) WHERE label IN $relativeResourcesTypeFilter)
+RETURN collect(DISTINCT ancestor) + collect(DISTINCT relative)

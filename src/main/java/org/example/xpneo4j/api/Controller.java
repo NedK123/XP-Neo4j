@@ -1,5 +1,6 @@
 package org.example.xpneo4j.api;
 
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import org.example.xpneo4j.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,21 @@ public class Controller {
     return ResponseEntity.ok(
         resourceFetcher.fetchLineage(
             FetchLineageRequest.builder().targetResourceId(targetResourceId).build()));
+  }
+
+  @GetMapping("/relatives")
+  public ResponseEntity<RelativesResponse> fetchRelatives(
+      @RequestParam String targetResourceId,
+      @RequestParam(required = false) Set<String> relativeResourcesTypeFilter,
+      @RequestParam int ancestorsGenerationLimit,
+      @RequestParam int relativesGenerationLimit) {
+    return ResponseEntity.ok(
+        resourceFetcher.fetchRelatives(
+            FetchRelativesRequest.builder()
+                .targetResourceId(targetResourceId)
+                .relativeResourcesTypeFilter(relativeResourcesTypeFilter)
+                .ancestorsGenerationLimit(ancestorsGenerationLimit)
+                .relativesGenerationLimit(relativesGenerationLimit)
+                .build()));
   }
 }

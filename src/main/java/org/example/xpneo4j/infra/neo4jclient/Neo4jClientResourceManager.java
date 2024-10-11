@@ -3,13 +3,12 @@ package org.example.xpneo4j.infra.neo4jclient;
 import static java.util.stream.StreamSupport.*;
 import static org.example.xpneo4j.infra.shared.QueryUtilities.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
 import org.example.xpneo4j.core.*;
+import org.example.xpneo4j.infra.neo4jrepo.ResourceFamily;
 import org.neo4j.driver.types.Entity;
 import org.neo4j.driver.types.Node;
 import org.neo4j.driver.types.Path;
@@ -98,6 +97,30 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
                     toNodesMap(path),
                     toRelationshipsMap(path)))
         .orElse(LineageResponse.builder().build());
+  }
+
+  @Override
+  public RelativesResponse fetchRelatives(FetchRelativesRequest request) {
+//    Optional<RelativesResponse> family =
+//        neo4jClient
+//            .query(generateFetchRelativesQuery(request))
+//            //            .bind("targetResourceId").to(request.getTargetResourceId())
+//            //            .bind("relativeResourcesTypeFilter").to("['E']")
+//            .fetchAs(ResourceFamily.class)
+//            .one()
+//            .map(
+//                result -> {
+//                  return RelativesResponse.builder().build();
+//                });
+    return RelativesResponse.builder().build();
+  }
+
+  private String generateFetchRelativesQuery(FetchRelativesRequest request) {
+    return fetchQuery("fetchResourceRelatives.cypher")
+        .replace("$ancestorsGenerationLimit", String.valueOf(request.getAncestorsGenerationLimit()))
+        .replace("$relativesGenerationLimit", String.valueOf(request.getRelativesGenerationLimit()))
+        .replace("$targetResourceId", "'" + request.getTargetResourceId() + "'")
+        .replace("$relativeResourcesTypeFilter", "['E']");
   }
 
   private static String fetchNodeElementId(Path path, String resourceId) {

@@ -7,6 +7,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RelativeRelationship {
-  @NonNull private String type;
-  @NonNull private String context;
+  private String type;
+  private String context;
 }
