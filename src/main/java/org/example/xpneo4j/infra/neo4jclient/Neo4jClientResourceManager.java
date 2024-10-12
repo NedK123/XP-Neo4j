@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
 import org.example.xpneo4j.core.*;
-import org.example.xpneo4j.infra.neo4jrepo.ResourceFamily;
 import org.neo4j.driver.types.Entity;
 import org.neo4j.driver.types.Node;
 import org.neo4j.driver.types.Path;
@@ -101,17 +100,17 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
 
   @Override
   public RelativesResponse fetchRelatives(FetchRelativesRequest request) {
-//    Optional<RelativesResponse> family =
-//        neo4jClient
-//            .query(generateFetchRelativesQuery(request))
-//            //            .bind("targetResourceId").to(request.getTargetResourceId())
-//            //            .bind("relativeResourcesTypeFilter").to("['E']")
-//            .fetchAs(ResourceFamily.class)
-//            .one()
-//            .map(
-//                result -> {
-//                  return RelativesResponse.builder().build();
-//                });
+    //    Optional<RelativesResponse> family =
+    //        neo4jClient
+    //            .query(generateFetchRelativesQuery(request))
+    //            //            .bind("targetResourceId").to(request.getTargetResourceId())
+    //            //            .bind("relativeResourcesTypeFilter").to("['E']")
+    //            .fetchAs(ResourceFamily.class)
+    //            .one()
+    //            .map(
+    //                result -> {
+    //                  return RelativesResponse.builder().build();
+    //                });
     return RelativesResponse.builder().build();
   }
 
