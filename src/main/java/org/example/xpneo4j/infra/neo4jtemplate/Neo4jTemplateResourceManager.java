@@ -124,8 +124,15 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
     return LineageResource.builder()
         .id(target.getId())
         .name(target.getName())
-        .types(target.getLabels())
+        .types(
+            target.getLabels().stream()
+                .filter(Neo4jTemplateResourceManager::filterOutInternalLabels)
+                .collect(Collectors.toSet()))
         .build();
+  }
+
+  private static boolean filterOutInternalLabels(String s) {
+    return !s.equals("Resource") && !s.contains("Project") && !s.equals("BaseResource");
   }
 
   private String generateFetchLineageQuery() {

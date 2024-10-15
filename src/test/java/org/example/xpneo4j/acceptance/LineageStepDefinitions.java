@@ -35,12 +35,12 @@ public class LineageStepDefinitions extends BaseAcceptanceTest {
     assertEquals(objectMapper.readTree(getEmptyLineageResponse()), jsonNode);
   }
 
-  @Then("the lineage response should contain only the target resource:")
+  @Then("the lineage response should contain:")
   public void theLineageResponseShouldContainOneResource(DataTable dataTable) throws Exception {
-    assertEquals(1, dataTable.entries().size());
     LineageResponse expectedResponse =
         LineageResponse.builder().targetResource(buildExpectedLineageFor(dataTable)).build();
-    assertEquals(expectedResponse, extractLineage(fetchedResult));
+    LineageResponse actual = extractLineage(fetchedResult);
+    assertEquals(expectedResponse, actual);
   }
 
   private LineageResponse extractLineage(MvcResult result) throws IOException {
