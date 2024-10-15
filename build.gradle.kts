@@ -32,12 +32,47 @@ dependencies {
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
+
+    testImplementation("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("org.testcontainers:neo4j:1.20.2")
+    testImplementation("org.testcontainers:junit-jupiter:1.20.2")
+    testImplementation("io.cucumber:cucumber-java:7.20.1")
+    testImplementation("io.cucumber:cucumber-junit:7.20.1")
+    testImplementation("io.cucumber:cucumber-spring:7.20.1")
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+configurations {
+    create("cucumberRuntime") {
+        extendsFrom(configurations["testImplementation"])
+    }
+}
+
+tasks.register<JavaExec>("cucumberCli") {
+    dependsOn("assemble", "testClasses")
+
+    mainClass.set("io.cucumber.core.cli.Main")
+
+    classpath = configurations["cucumberRuntime"] +
+        sourceSets["main"].output +
+        sourceSets["test"].output
+
+    args =
+        listOf(
+            "--plugin",
+            "pretty",
+            "--plugin",
+            "html:target/cucumber-report.html",
+            "--glue",
+            "org.example.xpneo4j.acceptance",
+            "src/test/resources/features",
+        )
 }
 
 spotless {

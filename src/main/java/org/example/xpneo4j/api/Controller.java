@@ -17,13 +17,13 @@ public class Controller {
   @PostMapping("/register-detached")
   public ResponseEntity<Void> register(@RequestBody RegisterDetachedResourceRequest request) {
     resourceCreator.register(request);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.created(null).build();
   }
 
   @PostMapping("/register-neighbor")
   public ResponseEntity<Void> register(@RequestBody RegisterNeighborRequest request) {
     resourceCreator.register(request);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.created(null).build();
   }
 
   @GetMapping("/lineage")

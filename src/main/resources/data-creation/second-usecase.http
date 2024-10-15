@@ -13,9 +13,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -39,9 +39,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -65,9 +65,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -91,9 +91,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -117,9 +117,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -143,9 +143,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -169,9 +169,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -195,9 +195,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -221,9 +221,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -247,9 +247,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -273,9 +273,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -299,9 +299,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -325,9 +325,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -351,9 +351,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -377,9 +377,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -403,9 +403,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -429,9 +429,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -455,9 +455,9 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
 
@@ -481,8 +481,8 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Status code is 200", function () {
+    client.test("Status code is 201", function () {
         console.log(request.body())
-        client.assert(response.status === 200, "Expected status code is 200")
+        client.assert(response.status === 201, "Expected status code is 201")
     });
 %}
