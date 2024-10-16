@@ -1,19 +1,16 @@
 package org.example.xpneo4j.acceptance;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import org.example.xpneo4j.acceptance.resource.registration.ResourceRegistrationUtilities;
 import org.example.xpneo4j.core.NeighborRegistrationInfo;
 import org.example.xpneo4j.core.RegisterDetachedResourceRequest;
 import org.example.xpneo4j.core.RegisterNeighborRequest;
 import org.example.xpneo4j.core.RelationshipType;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.http.MediaType;
 
 public class RegistrationStepDefinitions extends BaseAcceptanceTest {
 
@@ -30,14 +27,16 @@ public class RegistrationStepDefinitions extends BaseAcceptanceTest {
     dataTable.entries().forEach(this::registerResource);
   }
 
+  @Given("many resources that registered in the system")
+  public void may_resources_registered_in_the_system() {
+    populateDatabase();
+  }
+
   private void registerDetachedResource(Map<String, String> row) {
     try {
-      mockMvc
-          .perform(
-              post("/register-detached")
-                  .contentType(MediaType.APPLICATION_JSON)
-                  .content(objectMapper.writeValueAsString(map(row))))
-          .andExpect(status().isCreated());
+      String content =
+          testContainersObjectMapper.writeValueAsString(mapToRegisterDetachedResourceRequest(row));
+      ResourceRegistrationUtilities.registerDetachedResource(mockMvc, content);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
@@ -45,18 +44,16 @@ public class RegistrationStepDefinitions extends BaseAcceptanceTest {
 
   private void registerResource(Map<String, String> row) {
     try {
-      mockMvc
-          .perform(
-              post("/register-neighbor")
-                  .contentType(MediaType.APPLICATION_JSON)
-                  .content(objectMapper.writeValueAsString(mapo(row))))
-          .andExpect(status().isCreated());
+      String content =
+          testContainersObjectMapper.writeValueAsString(mapToRegisterNeighborRequest(row));
+      ResourceRegistrationUtilities.registerNeighborResource(mockMvc, content);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
 
-  private RegisterDetachedResourceRequest map(Map<String, String> row) {
+  private RegisterDetachedResourceRequest mapToRegisterDetachedResourceRequest(
+      Map<String, String> row) {
     return RegisterDetachedResourceRequest.builder()
         .id(row.get("id"))
         .name(row.get("name"))
@@ -74,7 +71,7 @@ public class RegistrationStepDefinitions extends BaseAcceptanceTest {
     return labels;
   }
 
-  private RegisterNeighborRequest mapo(Map<String, String> row) {
+  private RegisterNeighborRequest mapToRegisterNeighborRequest(Map<String, String> row) {
     return RegisterNeighborRequest.builder()
         .targetResourceId(row.get("parent"))
         .projectId("43882dec-d762-4dd9-a323-2fe3cf3f449e")

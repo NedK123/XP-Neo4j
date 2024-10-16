@@ -31,8 +31,9 @@ public class LineageStepDefinitions extends BaseAcceptanceTest {
 
   @Then("the lineage response should be empty")
   public void theLineageResponseShouldBeEmpty() throws IOException {
-    JsonNode jsonNode = objectMapper.readTree(fetchedResult.getResponse().getContentAsString());
-    assertEquals(objectMapper.readTree(getEmptyLineageResponse()), jsonNode);
+    JsonNode jsonNode =
+        testContainersObjectMapper.readTree(fetchedResult.getResponse().getContentAsString());
+    assertEquals(testContainersObjectMapper.readTree(getEmptyLineageResponse()), jsonNode);
   }
 
   @Then("the lineage response should contain:")
@@ -44,7 +45,8 @@ public class LineageStepDefinitions extends BaseAcceptanceTest {
   }
 
   private LineageResponse extractLineage(MvcResult result) throws IOException {
-    return objectMapper.readValue(result.getResponse().getContentAsString(), LineageResponse.class);
+    return testContainersObjectMapper.readValue(
+        result.getResponse().getContentAsString(), LineageResponse.class);
   }
 
   private static LineageResource buildExpectedLineageFor(DataTable dataTable) {

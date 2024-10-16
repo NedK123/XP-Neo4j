@@ -1,6 +1,13 @@
 package org.example.xpneo4j.acceptance;
 
 import io.cucumber.spring.CucumberContextConfiguration;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.example.xpneo4j.acceptance.data.creation.FirstUseCase;
+import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Driver;
+import org.neo4j.driver.GraphDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,7 +40,7 @@ public class BaseAcceptanceTest {
   }
 
   @Autowired protected MockMvc mockMvc;
-  protected ObjectMapper objectMapper = new ObjectMapper();
+  protected ObjectMapper testContainersObjectMapper = new ObjectMapper();
 
   @DynamicPropertySource
   static void configureTestProperties(DynamicPropertyRegistry registry) {
@@ -42,5 +49,30 @@ public class BaseAcceptanceTest {
     registry.add("spring.data.neo4j.database", () -> TEST_DB_NAME);
     registry.add("spring.neo4j.authentication.username", () -> TEST_DB_USERNAME);
     registry.add("spring.neo4j.authentication.password", () -> neo4jContainer.getAdminPassword());
+  }
+
+  protected void populateDatabase() {
+    importUseCase(1, 100);
+    importUseCase(2, 100);
+    importUseCase(3, 100);
+  }
+
+  private void importUseCase(int usecaseNumber, int importTimes) {
+    if (usecaseNumber == 1) {
+      new FirstUseCase(mockMvc).importData(importTimes);
+    }
+  }
+
+  private Driver getDriver() {
+    return GraphDatabase.driver(
+        neo4jContainer.getBoltUrl(), AuthTokens.basic(TEST_DB_USERNAME, TEST_DB_PASSWORD));
+  }
+
+  private static String fetchQuery(String queryFileName) {
+    try {
+      return new String(Files.readAllBytes(Paths.get("src/test/resources/data/" + queryFileName)));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 }
