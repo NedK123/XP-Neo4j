@@ -24,3 +24,6 @@ Feature: Fetching the lineage of a resource
       | type | name | id     | parent |
       | E    | E1   | E1-100 | B1-100 |
       | B    | B1   | B1-100 |        |
+
+  Scenario: batata
+    Given many resources that registered in the system

@@ -30,6 +30,7 @@ public class RegistrationStepDefinitions extends BaseAcceptanceTest {
   @Given("many resources that registered in the system")
   public void may_resources_registered_in_the_system() {
     populateDatabase();
+    System.out.println("Hello");
   }
 
   private void registerDetachedResource(Map<String, String> row) {

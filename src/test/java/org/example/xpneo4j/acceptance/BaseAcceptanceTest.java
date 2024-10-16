@@ -52,6 +52,13 @@ public class BaseAcceptanceTest {
   }
 
   protected void populateDatabase() {
+    getDriver()
+        .session()
+        .writeTransaction(
+            tx -> {
+              tx.run("MATCH (n:Resource) DETACH DELETE n");
+              return null;
+            });
     importUseCase(1, 100);
     importUseCase(2, 100);
     importUseCase(3, 100);
@@ -59,7 +66,9 @@ public class BaseAcceptanceTest {
 
   private void importUseCase(int usecaseNumber, int importTimes) {
     if (usecaseNumber == 1) {
-      new FirstUseCase(mockMvc).importData(importTimes);
+      for (int i = 0; i < importTimes; i++) {
+        new FirstUseCase(mockMvc).importData();
+      }
     }
   }
 

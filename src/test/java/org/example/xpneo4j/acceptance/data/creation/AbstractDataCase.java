@@ -15,11 +15,9 @@ public abstract class AbstractDataCase implements DataUseCase {
   }
 
   @Override
-  public void importData(int importTimes) {
-    for (int i = 0; i < importTimes; i++) {
-      getDetachedResourceRequests().forEach(this::registerDetachedResource);
-      getRegisterNeighborRequest().forEach(this::registerNeighbor);
-    }
+  public void importData() {
+    getDetachedResourceRequests().forEach(this::registerDetachedResource);
+    getRegisterNeighborRequest().forEach(this::registerNeighbor);
   }
 
   private void registerDetachedResource(RegisterDetachedResourceRequest request) {
