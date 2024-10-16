@@ -3,6 +3,7 @@ package org.example.xpneo4j.acceptance.data.creation;
 import static org.example.xpneo4j.core.RelationshipType.CREATED_UNDER;
 import static org.example.xpneo4j.core.RelationshipType.REPRODUCTION_OF;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import lombok.SneakyThrows;
@@ -87,87 +88,89 @@ public class FirstUseCase extends AbstractDataCase {
 
   @Override
   protected Set<RegisterDetachedResourceRequest> getDetachedResourceRequests() {
-    return Set.of(
+    var set = new LinkedHashSet<RegisterDetachedResourceRequest>();
+    set.add(
         RegisterDetachedResourceRequest.builder()
             .id(B1)
             .name("B1")
             .projectId(PROJECT_ID)
             .additionalLabels(TypeB())
             .build());
+    return set;
   }
 
   @Override
   protected Set<RegisterNeighborRequest> getRegisterNeighborRequest() {
-    return Set.of(
-        // S
-        builder().targetResourceId(B1).neighbor(CR_S(S1, "S1")).build(),
-        builder().targetResourceId(S1).neighbor(RO_S(S1R, "S1R")).build(),
-        builder().targetResourceId(S1R).neighbor(RO_S(S1RR, "S1RR")).build(),
-        builder().targetResourceId(S1RR).neighbor(RO_S(S1RRR, "S1RRR")).build(),
-        builder().targetResourceId(S1RRR).neighbor(RO_S(S1RRRR, "S1RRRR")).build(),
-        builder().targetResourceId(B1).neighbor(CR_S(S2, "S2")).build(),
-        builder().targetResourceId(S2).neighbor(RO_S(S2R, "S2R")).build(),
-        builder().targetResourceId(S2R).neighbor(RO_S(S2RR, "S2RR")).build(),
-        builder().targetResourceId(S2RR).neighbor(RO_S(S2RRR, "S2RRR")).build(),
-        builder().targetResourceId(S2RRR).neighbor(RO_S(S2RRRR, "S2RRRR")).build(),
-        builder().targetResourceId(B1).neighbor(CR_S(S3, "S3")).build(),
-        builder().targetResourceId(S3).neighbor(RO_S(S3R, "S3R")).build(),
-        builder().targetResourceId(S3R).neighbor(RO_S(S3RR, "S3RR")).build(),
-        builder().targetResourceId(S3RR).neighbor(RO_S(S3RRR, "S3RRR")).build(),
-        builder().targetResourceId(S3RRR).neighbor(RO_S(S3RRRR, "S3RRRR")).build(),
-        builder().targetResourceId(B1).neighbor(CR_S(S4, "S4")).build(),
-        builder().targetResourceId(S4).neighbor(RO_S(S4R, "S4R")).build(),
-        builder().targetResourceId(S4R).neighbor(RO_S(S4RR, "S4RR")).build(),
-        builder().targetResourceId(S4RR).neighbor(RO_S(S4RRR, "S4RRR")).build(),
-        builder().targetResourceId(S4RRR).neighbor(RO_S(S4RRRR, "S4RRRR")).build(),
-        builder().targetResourceId(B1).neighbor(CR_S(S5, "S5")).build(),
-        builder().targetResourceId(S5).neighbor(RO_S(S5R, "S5R")).build(),
-        builder().targetResourceId(S5R).neighbor(RO_S(S5RR, "S5RR")).build(),
-        builder().targetResourceId(S5RR).neighbor(RO_S(S5RRR, "S5RRR")).build(),
-        builder().targetResourceId(S5RRR).neighbor(RO_S(S5RRRR, "S5RRRR")).build(),
+    var set = new LinkedHashSet<RegisterNeighborRequest>();
+    set.add(builder().targetResourceId(B1).neighbor(CR_S(S1, "S1")).build());
+    set.add(builder().targetResourceId(S1).neighbor(RO_S(S1R, "S1R")).build());
+    set.add(builder().targetResourceId(S1R).neighbor(RO_S(S1RR, "S1RR")).build());
+    set.add(builder().targetResourceId(S1RR).neighbor(RO_S(S1RRR, "S1RRR")).build());
+    set.add(builder().targetResourceId(S1RRR).neighbor(RO_S(S1RRRR, "S1RRRR")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_S(S2, "S2")).build());
+    set.add(builder().targetResourceId(S2).neighbor(RO_S(S2R, "S2R")).build());
+    set.add(builder().targetResourceId(S2R).neighbor(RO_S(S2RR, "S2RR")).build());
+    set.add(builder().targetResourceId(S2RR).neighbor(RO_S(S2RRR, "S2RRR")).build());
+    set.add(builder().targetResourceId(S2RRR).neighbor(RO_S(S2RRRR, "S2RRRR")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_S(S3, "S3")).build());
+    set.add(builder().targetResourceId(S3).neighbor(RO_S(S3R, "S3R")).build());
+    set.add(builder().targetResourceId(S3R).neighbor(RO_S(S3RR, "S3RR")).build());
+    set.add(builder().targetResourceId(S3RR).neighbor(RO_S(S3RRR, "S3RRR")).build());
+    set.add(builder().targetResourceId(S3RRR).neighbor(RO_S(S3RRRR, "S3RRRR")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_S(S4, "S4")).build());
+    set.add(builder().targetResourceId(S4).neighbor(RO_S(S4R, "S4R")).build());
+    set.add(builder().targetResourceId(S4R).neighbor(RO_S(S4RR, "S4RR")).build());
+    set.add(builder().targetResourceId(S4RR).neighbor(RO_S(S4RRR, "S4RRR")).build());
+    set.add(builder().targetResourceId(S4RRR).neighbor(RO_S(S4RRRR, "S4RRRR")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_S(S5, "S5")).build());
+    set.add(builder().targetResourceId(S5).neighbor(RO_S(S5R, "S5R")).build());
+    set.add(builder().targetResourceId(S5R).neighbor(RO_S(S5RR, "S5RR")).build());
+    set.add(builder().targetResourceId(S5RR).neighbor(RO_S(S5RRR, "S5RRR")).build());
+    set.add(builder().targetResourceId(S5RRR).neighbor(RO_S(S5RRRR, "S5RRRR")).build());
 
-        // E
-        builder().targetResourceId(S1).neighbor(CR_E(E1, "E1")).build(),
-        builder().targetResourceId(S1R).neighbor(CR_E(E1R, "E1R")).build(),
-        builder().targetResourceId(S1RR).neighbor(CR_E(E1RR, "E1RR")).build(),
-        builder().targetResourceId(S1RRR).neighbor(CR_E(E1RRR, "E1RRR")).build(),
-        builder().targetResourceId(S1RRRR).neighbor(CR_E(E1RRRR, "E1RRRR")).build(),
-        builder().targetResourceId(S2).neighbor(CR_E(E2, "E2")).build(),
-        builder().targetResourceId(S2R).neighbor(CR_E(E2R, "E2R")).build(),
-        builder().targetResourceId(S2RR).neighbor(CR_E(E2RR, "E2RR")).build(),
-        builder().targetResourceId(S2RRR).neighbor(CR_E(E2RRR, "E2RRR")).build(),
-        builder().targetResourceId(S2RRRR).neighbor(CR_E(E2RRRR, "E2RRRR")).build(),
-        builder().targetResourceId(S3).neighbor(CR_E(E3, "E3")).build(),
-        builder().targetResourceId(S3R).neighbor(CR_E(E3R, "E3R")).build(),
-        builder().targetResourceId(S3RR).neighbor(CR_E(E3RR, "E3RR")).build(),
-        builder().targetResourceId(S3RRR).neighbor(CR_E(E3RRR, "E3RRR")).build(),
-        builder().targetResourceId(S3RRRR).neighbor(CR_E(E3RRRR, "E3RRRR")).build(),
-        builder().targetResourceId(S4).neighbor(CR_E(E4, "E4")).build(),
-        builder().targetResourceId(S4R).neighbor(CR_E(E4R, "E4R")).build(),
-        builder().targetResourceId(S4RR).neighbor(CR_E(E4RR, "E4RR")).build(),
-        builder().targetResourceId(S4RRR).neighbor(CR_E(E4RRR, "E4RRR")).build(),
-        builder().targetResourceId(S4RRRR).neighbor(CR_E(E4RRRR, "E4RRRR")).build(),
-        builder().targetResourceId(S5).neighbor(CR_E(E5, "E5")).build(),
-        builder().targetResourceId(S5R).neighbor(CR_E(E5R, "E5R")).build(),
-        builder().targetResourceId(S5RR).neighbor(CR_E(E5RR, "E5RR")).build(),
-        builder().targetResourceId(S5RRR).neighbor(CR_E(E5RRR, "E5RRR")).build(),
-        builder().targetResourceId(S5RRRR).neighbor(CR_E(E5RRRR, "E5RRRR")).build(),
-        builder().targetResourceId(B1).neighbor(CR_E(E6, "E6", "ref")).build(),
-        builder().targetResourceId(B1).neighbor(CR_E(E7, "E7", "ref")).build(),
-        builder().targetResourceId(B1).neighbor(CR_E(E8, "E8", "ref")).build(),
-        builder().targetResourceId(B1).neighbor(CR_E(E9, "E9", "ref")).build(),
-        builder().targetResourceId(B1).neighbor(CR_E(E10, "E10", "ref")).build(),
+    // E
+    set.add(builder().targetResourceId(S1).neighbor(CR_E(E1, "E1")).build());
+    set.add(builder().targetResourceId(S1R).neighbor(CR_E(E1R, "E1R")).build());
+    set.add(builder().targetResourceId(S1RR).neighbor(CR_E(E1RR, "E1RR")).build());
+    set.add(builder().targetResourceId(S1RRR).neighbor(CR_E(E1RRR, "E1RRR")).build());
+    set.add(builder().targetResourceId(S1RRRR).neighbor(CR_E(E1RRRR, "E1RRRR")).build());
+    set.add(builder().targetResourceId(S2).neighbor(CR_E(E2, "E2")).build());
+    set.add(builder().targetResourceId(S2R).neighbor(CR_E(E2R, "E2R")).build());
+    set.add(builder().targetResourceId(S2RR).neighbor(CR_E(E2RR, "E2RR")).build());
+    set.add(builder().targetResourceId(S2RRR).neighbor(CR_E(E2RRR, "E2RRR")).build());
+    set.add(builder().targetResourceId(S2RRRR).neighbor(CR_E(E2RRRR, "E2RRRR")).build());
+    set.add(builder().targetResourceId(S3).neighbor(CR_E(E3, "E3")).build());
+    set.add(builder().targetResourceId(S3R).neighbor(CR_E(E3R, "E3R")).build());
+    set.add(builder().targetResourceId(S3RR).neighbor(CR_E(E3RR, "E3RR")).build());
+    set.add(builder().targetResourceId(S3RRR).neighbor(CR_E(E3RRR, "E3RRR")).build());
+    set.add(builder().targetResourceId(S3RRRR).neighbor(CR_E(E3RRRR, "E3RRRR")).build());
+    set.add(builder().targetResourceId(S4).neighbor(CR_E(E4, "E4")).build());
+    set.add(builder().targetResourceId(S4R).neighbor(CR_E(E4R, "E4R")).build());
+    set.add(builder().targetResourceId(S4RR).neighbor(CR_E(E4RR, "E4RR")).build());
+    set.add(builder().targetResourceId(S4RRR).neighbor(CR_E(E4RRR, "E4RRR")).build());
+    set.add(builder().targetResourceId(S4RRRR).neighbor(CR_E(E4RRRR, "E4RRRR")).build());
+    set.add(builder().targetResourceId(S5).neighbor(CR_E(E5, "E5")).build());
+    set.add(builder().targetResourceId(S5R).neighbor(CR_E(E5R, "E5R")).build());
+    set.add(builder().targetResourceId(S5RR).neighbor(CR_E(E5RR, "E5RR")).build());
+    set.add(builder().targetResourceId(S5RRR).neighbor(CR_E(E5RRR, "E5RRR")).build());
+    set.add(builder().targetResourceId(S5RRRR).neighbor(CR_E(E5RRRR, "E5RRRR")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_E(E6, "E6", "ref")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_E(E7, "E7", "ref")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_E(E8, "E8", "ref")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_E(E9, "E9", "ref")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_E(E10, "E10", "ref")).build());
 
-        // M
-        builder().targetResourceId(B1).neighbor(CR_M(M1, "M1")).build(),
-        builder().targetResourceId(B1).neighbor(CR_M(M2, "M2")).build(),
-        builder().targetResourceId(B1).neighbor(CR_M(M3, "M3")).build(),
-        builder().targetResourceId(M1).neighbor(CR_S(S6, "S6")).build(),
-        builder().targetResourceId(M2).neighbor(CR_S(S7, "S7")).build(),
-        builder().targetResourceId(M3).neighbor(CR_S(S8, "S8")).build(),
-        builder().targetResourceId(S6).neighbor(CR_E(E11, "E11")).build(),
-        builder().targetResourceId(S7).neighbor(CR_E(E12, "E12")).build(),
-        builder().targetResourceId(S8).neighbor(CR_E(E13, "E13")).build());
+    // M
+    set.add(builder().targetResourceId(B1).neighbor(CR_M(M1, "M1")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_M(M2, "M2")).build());
+    set.add(builder().targetResourceId(B1).neighbor(CR_M(M3, "M3")).build());
+    set.add(builder().targetResourceId(M1).neighbor(CR_S(S6, "S6")).build());
+    set.add(builder().targetResourceId(M2).neighbor(CR_S(S7, "S7")).build());
+    set.add(builder().targetResourceId(M3).neighbor(CR_S(S8, "S8")).build());
+    set.add(builder().targetResourceId(S6).neighbor(CR_E(E11, "E11")).build());
+    set.add(builder().targetResourceId(S7).neighbor(CR_E(E12, "E12")).build());
+    set.add(builder().targetResourceId(S8).neighbor(CR_E(E13, "E13")).build());
+    return set;
   }
 
   private RegisterNeighborRequest.RegisterNeighborRequestBuilder builder() {

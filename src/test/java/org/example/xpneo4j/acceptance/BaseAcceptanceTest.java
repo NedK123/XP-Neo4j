@@ -49,6 +49,7 @@ public class BaseAcceptanceTest {
     registry.add("spring.data.neo4j.database", () -> TEST_DB_NAME);
     registry.add("spring.neo4j.authentication.username", () -> TEST_DB_USERNAME);
     registry.add("spring.neo4j.authentication.password", () -> neo4jContainer.getAdminPassword());
+    registry.add("logging.level.org.springframework.data.neo4j.cypher=", () -> "ERROR");
   }
 
   protected void populateDatabase() {

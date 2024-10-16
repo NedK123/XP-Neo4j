@@ -18,6 +18,7 @@ public abstract class AbstractDataCase implements DataUseCase {
   public void importData() {
     getDetachedResourceRequests().forEach(this::registerDetachedResource);
     getRegisterNeighborRequest().forEach(this::registerNeighbor);
+    System.out.println("Hellooooo");
   }
 
   private void registerDetachedResource(RegisterDetachedResourceRequest request) {

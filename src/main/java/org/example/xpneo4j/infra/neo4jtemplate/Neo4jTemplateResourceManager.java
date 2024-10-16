@@ -35,7 +35,11 @@ public class Neo4jTemplateResourceManager implements ResourceCreator, ResourceFe
     log.info("Registering neighbor node for request={}", request);
     template
         .findById(request.getTargetResourceId(), ResourceNode.class)
-        .ifPresent(targetResource -> template.save(generateNeighbor(targetResource, request)));
+        .ifPresentOrElse(
+            targetResource -> template.save(generateNeighbor(targetResource, request)),
+            () -> {
+              throw new IllegalArgumentException("Target resource not found");
+            });
   }
 
   @Override
