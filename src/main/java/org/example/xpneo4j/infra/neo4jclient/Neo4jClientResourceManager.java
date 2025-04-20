@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
 import org.example.xpneo4j.core.*;
+import org.example.xpneo4j.infra.shared.QueryUtilities.RegisterDetachedResourceQuery;
+import org.example.xpneo4j.infra.shared.QueryUtilities.RegisterNeighborResourceQuery;
 import org.neo4j.driver.types.Entity;
 import org.neo4j.driver.types.Node;
 import org.neo4j.driver.types.Path;
@@ -37,7 +39,7 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
   @Override
   public void register(RegisterDetachedResourceRequest request) {
     log.info("Registering detached node for request={}", request);
-    String query = generateRegisterDetachedResourceQuery(request);
+    String query = RegisterDetachedResourceQuery.generate(request);
     neo4jClient
         .query(query)
         .bind(request.getId())
@@ -52,7 +54,7 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
   @Override
   public void register(RegisterNeighborRequest request) {
     log.info("Registering neighbor node for request={}", request);
-    String query = generateRegisterNeighborQuery(request);
+    String query = RegisterNeighborResourceQuery.generate(request);
     neo4jClient
         .query(query)
         .bind(request.getTargetResourceId())
@@ -193,25 +195,7 @@ public class Neo4jClientResourceManager implements ResourceCreator, ResourceFetc
             constructResourceLabels(request.getProjectId(), request.getAdditionalLabels()));
   }
 
-  private static String generateRegisterNeighborQuery(RegisterNeighborRequest request) {
-    return fetchQuery("registerNeighborResource.cypher")
-        .replace(
-            TARGET_RESOURCE_CUSTOM_LABELS,
-            constructResourceLabels(request.getProjectId(), Set.of()))
-        .replace(
-            NEIGHBOR_CUSTOM_LABELS,
-            constructResourceLabels(
-                request.getProjectId(), request.getNeighbor().getAdditionalLabels()))
-        .replace(
-            RELATION_CUSTOM_LABEL,
-            constructrelationshipType(request.getNeighbor().getRelationshipType()));
-  }
-
   private static String generateInheritTargetCreationConnectionForNeighbor() {
     return fetchQuery("inheritTargetCreationConnectionForNeighbor.cypher");
-  }
-
-  private static String constructrelationshipType(RelationshipType type) {
-    return ":%s".formatted(type.name());
   }
 }

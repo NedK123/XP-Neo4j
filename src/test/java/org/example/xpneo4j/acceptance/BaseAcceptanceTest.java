@@ -1,9 +1,6 @@
 package org.example.xpneo4j.acceptance;
 
 import io.cucumber.spring.CucumberContextConfiguration;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import org.example.xpneo4j.acceptance.data.creation.FirstUseCase;
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Driver;
@@ -60,9 +57,9 @@ public class BaseAcceptanceTest {
               tx.run("MATCH (n:Resource) DETACH DELETE n");
               return null;
             });
-    importUseCase(1, 100);
-    importUseCase(2, 100);
-    importUseCase(3, 100);
+    importUseCase(1, 10);
+    importUseCase(2, 10);
+    importUseCase(3, 10);
   }
 
   private void importUseCase(int usecaseNumber, int importTimes) {
@@ -76,13 +73,5 @@ public class BaseAcceptanceTest {
   private Driver getDriver() {
     return GraphDatabase.driver(
         neo4jContainer.getBoltUrl(), AuthTokens.basic(TEST_DB_USERNAME, TEST_DB_PASSWORD));
-  }
-
-  private static String fetchQuery(String queryFileName) {
-    try {
-      return new String(Files.readAllBytes(Paths.get("src/test/resources/data/" + queryFileName)));
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
   }
 }

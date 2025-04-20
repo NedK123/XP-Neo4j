@@ -25,20 +25,24 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-neo4j")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("eu.michael-simons.neo4j:neo4j-migrations-spring-boot-starter:2.13.1")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
+
+    implementation("org.springframework.boot:spring-boot-starter-data-neo4j")
+    implementation("eu.michael-simons.neo4j:neo4j-migrations-spring-boot-starter:2.13.1")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
 
     testImplementation("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
     testImplementation("org.testcontainers:neo4j:1.20.2")
     testImplementation("org.testcontainers:junit-jupiter:1.20.2")
+
     testImplementation("io.cucumber:cucumber-java:7.20.1")
     testImplementation("io.cucumber:cucumber-junit:7.20.1")
     testImplementation("io.cucumber:cucumber-spring:7.20.1")
